@@ -31,7 +31,7 @@
             </template>
         </base-nav>
         <!-- Header -->
-        <div class="header bg-gradient-success py-7 py-lg-15">
+        <div class="header bg-gradient-success py-8 py-lg-15">
             <div class="container">
                 <div class="header-body text-center mb-5">
                     <div class="row justify-content-center">
@@ -56,7 +56,7 @@
                 <router-view></router-view>
             </slide-y-up-transition>
         </div>
-        <footer class="py-5">
+        <footer class="py-7">
             <div class="container">
                 <div class="row align-items-center justify-content-xl-between">
                     <div class="col-xl-6">
