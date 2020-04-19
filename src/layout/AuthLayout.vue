@@ -28,44 +28,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- Navbar items -->
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon" to="/">
-                            <i class="ni ni-planet"></i>
-                            <span class="nav-link-inner--text">Dashboard</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon" to="/register">
-                            <i class="ni ni-circle-08"></i>
-                            <span class="nav-link-inner--text">Register</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon" to="/login">
-                            <i class="ni ni-key-25"></i>
-                            <span class="nav-link-inner--text">Login</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link nav-link-icon" to="/profile">
-                            <i class="ni ni-single-02"></i>
-                            <span class="nav-link-inner--text">Profile</span>
-                        </router-link>
-                    </li>
-                </ul>
             </template>
         </base-nav>
         <!-- Header -->
-        <div class="header bg-gradient-success py-7 py-lg-8">
+        <div class="header bg-gradient-success py-7 py-lg-15">
             <div class="container">
-                <div class="header-body text-center mb-7">
+                <div class="header-body text-center mb-5">
                     <div class="row justify-content-center">
                         <div class="col-lg-5 col-md-6">
-                            <h1 class="text-white">Welcome!</h1>
-                            <p class="text-lead text-white">Use these awesome forms to login or create new account in
-                                your project for free.</p>
+                            <h1 class="text-white">MILITARY LOUNGE</h1>
+                            <p class="text-lead text-white text-lg">Let's start with us
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -89,7 +62,7 @@
                     <div class="col-xl-6">
                         <div class="copyright text-center text-xl-left text-muted">
                             &copy; {{year}} <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
-                                               target="_blank">Creative Tim</a>
+                                                target="_blank">Creative Tim</a>
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -113,6 +86,7 @@
                 </div>
             </div>
         </footer>
+        
     </div>
 </template>
 <script>
