@@ -4,23 +4,16 @@
             <div class="card bg-secondary shadow border-0">
                 <div class="card-header bg-transparent pb-5">
                     <div class="text-muted text-center mt-2 mb-3">
-                        <small>Sign up with</small>
+                        <small>Sign up with Google</small>
                     </div>
                     <div class="btn-wrapper text-center">
-                        <a href="#" class="btn btn-neutral btn-icon">
-                            <span class="btn-inner--icon"><img src="img/icons/common/github.svg"></span>
-                            <span class="btn-inner--text">Github</span>
-                        </a>
-                        <a href="#" class="btn btn-neutral btn-icon">
+                        <a href="#" class="btn btn-neutral btn-icon btn-block">
                             <span class="btn-inner--icon"><img src="img/icons/common/google.svg"></span>
                             <span class="btn-inner--text">Google</span>
                         </a>
                     </div>
                 </div>
                 <div class="card-body px-lg-5 py-lg-5">
-                    <div class="text-center text-muted mb-4">
-                        <small>Or sign up with credentials</small>
-                    </div>
                     <form role="form">
 
                         <base-input class="input-group-alternative mb-3"
