@@ -12,13 +12,12 @@
                                 <large>Sign in with Google</large>
                             </div>
                             <div class="btn-wrapper text-center">
-                                <a href="#" class="btn btn-neutral btn-icon btn-block btn-size">
+                                <a href="#/selectType" class="btn btn-neutral btn-icon btn-block btn-size">
                                     <span class="btn-inner--icon"><img src="img/icons/common/google.svg"></span>
                                     <span class="btn-inner--text">Google</span>
                                 </a>
                                 <p></p>
                             </div>
-                            
                         </div>
                     </div>
             </div>
