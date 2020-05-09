@@ -15,7 +15,7 @@
                                 <a href="#/dashboard" class="btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/soldier.png">
                                 </a>
-                                <a href='#/register' class="btn btn-neutral btn-icon btn-size">
+                                <a href='#/dashboard' class="btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/manager.png">
                                 </a>
                                 <p></p>
