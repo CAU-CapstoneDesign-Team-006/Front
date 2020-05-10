@@ -73,7 +73,7 @@ export default {
                        params: {
                                 'gmail' : this.$route.params.gmail,
                                 'name' : this.$route.params.name,
-                                'type' : 'o'
+                                'type' : 'y'
                             }
                    })
                 })

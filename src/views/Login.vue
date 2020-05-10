@@ -89,7 +89,7 @@
                             }
                         }) 
                     }
-                    else if (res.data == "o"){
+                    else if (res.data == "y"){
                         router.push({ 
                             name: 'dashboard',
                             params: {
