@@ -3,7 +3,7 @@
             <div class="col-lg-5 col-md-6">
                 <div class="card bg-secondary shadow border-0">
 
-                    <div class="card-body px-lg-5 py-lg-4">
+                    <div class="card-body px-lg-5 py-lg-6">
 
                     </div>
                     <div class="card-header bg-transparent">
@@ -12,10 +12,10 @@
                             </div>
 
                             <div class="btn-wrapper text-center">
-                                <a href="#/dashboard" class="soldier btn btn-neutral btn-icon btn-size">
+                                <a href="#/dashboard" @click="soldier()"  class="soldier btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/soldier.png">
                                 </a>
-                                <a href='#/dashboard' class="others btn btn-neutral btn-icon btn-size">
+                                <a href='#/dashboard' @click="others()" class="others btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/manager.png">
                                 </a>
                                 <p></p>
@@ -37,41 +37,56 @@ export default {
     },
     methods: {
         soldier() {
-            axios.get('https://localhost:8080/#/login')
-                .then(res => {
-                    this.id = res.data.zu,
-                    this.name = res.data.Ad,
-                    this.type = 1
-                }),
-            axios.post('https://localhost:8080/#/login')
-                .then(() => {
-                    this.$router.push({
-                        name : 'map',
-                        params : {
-                            'gmail' : this.id,
-                            '이름' : this.name,
-                            '타입' : this.type
-                        }
-                    })
+            var router = this.$router;
+            const params = new URLSearchParams();
+            params.append('gmail', this.$route.params.gmail)
+            params.append('name', this.$route.params.name)
+            params.append('type', 1)
+            axios
+            // .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params) 
+                .post('http://localhost:3000/mysql/insert', params, {
+                    headers:{
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'}
+                }) 
+                .then(res => { 
+                   router.push({
+                       name: 'maps',
+                       params: {
+                                'gmail' : this.$route.params.gmail,
+                                'name' : this.$route.params.name,
+                                'type' : 's'
+                            }
+                   })
+                })
+                .catch(ex =>{
                 })
         },
         others() {
-            axios.get('https://localhost:8080/#/login')
-                .then(res => {
-                    this.id = res.data.zu,
-                    this.name = res.data.Ad,
-                    this.type = 2
-                }),
-            axios.post('https://localhost:8080/#/login')
-                .then(() => {
-                    this.$router.push({
-                        name : 'dashboard',
-                        params : {
-                            'gmail' : this.id,
-                            '이름' : this.name,
-                            '타입' : this.type
-                        }
-                    })
+            var router = this.$router;
+            const params = new URLSearchParams();
+            console.log(this.$route.params);
+            params.append('gmail', this.$route.params.gmail)
+            params.append('name', this.$route.params.name)
+            params.append('type', 0)
+            axios
+            // .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params) 
+                .post('http://localhost:3000/mysql/insert', params, {
+                    headers:{
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'}
+                }) 
+                .then(res => { 
+                   router.push({
+                       name: 'dashboard',
+                       params: {
+                                'gmail' : this.$route.params.gmail,
+                                'name' : this.$route.params.name,
+                                'type' : 'o'
+                            }
+                   })
+                })
+                .catch(ex =>{
                 })
         }
     }

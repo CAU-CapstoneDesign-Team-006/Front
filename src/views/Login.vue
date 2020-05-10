@@ -78,44 +78,39 @@
                     'Accept': 'application/json'}
                 }) 
                 .then(res => { 
-                    console.log(res.data);
                     if (res.data == "g") {
                         router.push({ 
                             name: 'maps',
                             params: {
-                                'gmail' : googleUser.getBasicProfile().zu
+                                'gmail' : googleUser.getBasicProfile().zu,
+                                'name' : googleUser.getBasicProfile().Ad,
+                                'type' : 's'
                             }
-                        }) // 해당하는 라우터 이름으로 이동
+                        }) 
                     }
                     else if (res.data == "o"){
                         router.push({ 
                             name: 'dashboard',
                             params: {
-                                'gmail' : googleUser.getBasicProfile().zu
+                                'gmail' : googleUser.getBasicProfile().zu,
+                                'name' : googleUser.getBasicProfile().Ad,
+                                'type' : 'm'
                             }
                         }) // 해
                     }
                     else {
                         router.push({ 
-                            name: 'register',
+                            name: 'selectType',
                             params: {
                                 'gmail' : googleUser.getBasicProfile().zu ,
                                 'name' : googleUser.getBasicProfile().Ad
                             }
-                        }) // 해당하는 라우터 이름으로 이동
+                        }) 
                     }
                 })
                 .catch(ex =>{
                     console.log(ex);
-                    // this.modals.modal0 = true;
-                    // console.log("why")
-                    // router.push({ 
-                    //         name: 'dashboard',
-                    //         params: {
-                    //             'type' : 1 ,
-                    //             'name' : googleUser.getBasicProfile().Ad
-                    //         }
-                    // }) // 해당하는 라우터 이름으로 이동
+                    this.modals.modal0 = true;
                 })
         },
         onFailure(error) {
