@@ -19,6 +19,7 @@
     export default {
         mounted() {
             window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
+            console.log(this.$route.params)
         },
 
         methods : {
