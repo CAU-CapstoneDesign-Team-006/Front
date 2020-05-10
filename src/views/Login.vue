@@ -66,31 +66,57 @@
         },
         methods: {
         onSuccess(googleUser) {
-            axios.post('ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/search', {gmail: googleUser.getBasicProfile().zu}) 
-            .then(res => { 
-                if (res.data != "yes") {
-                    router.push({ 
-                        name: 'maps',
-                        params: {
-                            'gmail' : googleUser.getBasicProfile().zu
-                        }
-                    }) // 해당하는 라우터 이름으로 이동
-                }
-                else {
-                    router.push({ 
-                        name: 'register',
-                        params: {
-                            'gmail' : googleUser.getBasicProfile().zu ,
-                            'name' : googleUser.getBasicProfile().Ad
-                        }
-                    }) // 해당하는 라우터 이름으로 이동
-                }
-            })
-            .catch(ex =>{
-                console.log("Try it again");
-                console.log(modal.show)
-                this.modals.modal0 = true;
-            })
+            var router = this.$router;
+            const params = new URLSearchParams();
+            var gmail2 = googleUser.getBasicProfile().zu;
+            params.append('gmail', gmail2)
+            axios
+            // .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params) 
+                .post('http://localhost:3000/mysql', params, {
+                    headers:{
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'}
+                }) 
+                .then(res => { 
+                    console.log(res.data);
+                    if (res.data == "g") {
+                        router.push({ 
+                            name: 'maps',
+                            params: {
+                                'gmail' : googleUser.getBasicProfile().zu
+                            }
+                        }) // 해당하는 라우터 이름으로 이동
+                    }
+                    else if (res.data == "o"){
+                        router.push({ 
+                            name: 'dashboard',
+                            params: {
+                                'gmail' : googleUser.getBasicProfile().zu
+                            }
+                        }) // 해
+                    }
+                    else {
+                        router.push({ 
+                            name: 'register',
+                            params: {
+                                'gmail' : googleUser.getBasicProfile().zu ,
+                                'name' : googleUser.getBasicProfile().Ad
+                            }
+                        }) // 해당하는 라우터 이름으로 이동
+                    }
+                })
+                .catch(ex =>{
+                    console.log(ex);
+                    // this.modals.modal0 = true;
+                    // console.log("why")
+                    // router.push({ 
+                    //         name: 'dashboard',
+                    //         params: {
+                    //             'type' : 1 ,
+                    //             'name' : googleUser.getBasicProfile().Ad
+                    //         }
+                    // }) // 해당하는 라우터 이름으로 이동
+                })
         },
         onFailure(error) {
           console.log(error);

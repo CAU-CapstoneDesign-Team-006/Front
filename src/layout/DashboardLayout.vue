@@ -11,8 +11,15 @@
         <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
 
         <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>
-
-
+        <div v-if="isg == n">
+          <sidebar-item
+            :link="{
+              name: 'Dashboard',
+              icon: 'ni ni-tv-2 text-primary',
+              path: '/dashboard'
+            }"
+          />
+        </div>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
@@ -41,7 +48,8 @@
     },
     data() {
       return {
-        sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
+        sidebarBackground: 'vue', //vue|blue|orange|green|red|primary
+        isg: 'y'
       };
     },
     methods: {
@@ -50,6 +58,13 @@
           this.$sidebar.displaySidebar(false);
         }
       }
+    },
+    created(){
+      if (this.$route.params.type != 0){
+        this.isg = 'n';
+      }
+      console.log(this.$route.params.type)
+      console.log("1")
     }
   };
 </script>
