@@ -72,12 +72,13 @@
             params.append('gmail', gmail2)
             axios
             // .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params) 
-                .post('http://localhost:3000/mysql', params, {
+                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params, {
                     headers:{
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'}
                 }) 
                 .then(res => { 
+                    console.log(res.data);
                     if (res.data == "g") {
                         router.push({ 
                             name: 'maps',

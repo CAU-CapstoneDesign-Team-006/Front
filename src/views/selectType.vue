@@ -43,12 +43,7 @@ export default {
             params.append('name', this.$route.params.name)
             params.append('type', 1)
             axios
-            // .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params) 
-                .post('http://localhost:3000/mysql/insert', params, {
-                    headers:{
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'}
-                }) 
+                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
                    router.push({
                        name: 'maps',
@@ -60,6 +55,7 @@ export default {
                    })
                 })
                 .catch(ex =>{
+                    cosnole.log("bye");
                 })
         },
         others() {
@@ -70,12 +66,7 @@ export default {
             params.append('name', this.$route.params.name)
             params.append('type', 0)
             axios
-            // .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params) 
-                .post('http://localhost:3000/mysql/insert', params, {
-                    headers:{
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'}
-                }) 
+            .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
                    router.push({
                        name: 'dashboard',
