@@ -10,7 +10,7 @@
 
         <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
 
-        <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>
+        <sidebar-item :link="{name: 'Board', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>
         <div v-if="this.$store.state.type == 0">
           <sidebar-item
             :link="{

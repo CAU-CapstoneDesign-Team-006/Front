@@ -37,7 +37,7 @@ export default new Router({
         },
         {
           path: '/tables',
-          name: 'tables',
+          name: 'Board',
           component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
         }
       ]
