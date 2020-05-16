@@ -21,6 +21,7 @@ import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
 import axios from 'axios'
+import { store } from "./store";
 
 Vue.config.productionTip = false
 
@@ -29,5 +30,6 @@ Vue.prototype.$http = axios
 Vue.use(ArgonDashboard)
 new Vue({
   router,
+  store : store,
   render: h => h(App)
 }).$mount('#app')

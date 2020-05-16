@@ -11,7 +11,7 @@
         <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
 
         <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>
-        <div v-if="isg == n">
+        <div v-if="this.$store.state.type == 0">
           <sidebar-item
             :link="{
               name: 'Dashboard',
@@ -60,11 +60,7 @@
       }
     },
     created(){
-      if (this.$route.params.type != 0){
-        this.isg = 'n';
-      }
-      console.log(this.$route.params.type)
-      console.log("1")
+      
     }
   };
 </script>
