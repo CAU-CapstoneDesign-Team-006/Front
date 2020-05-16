@@ -55,7 +55,7 @@ export default {
                    })
                 })
                 .catch(ex =>{
-                    cosnole.log("bye");
+                    console.log("bye");
                 })
         },
         others() {

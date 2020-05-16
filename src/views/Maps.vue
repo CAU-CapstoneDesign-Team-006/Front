@@ -16,10 +16,11 @@
     </div>
 </template>
 <script>
+    import axios from 'axios'
     export default {
         mounted() {
             window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
-            console.log(this.$route.params)
+            // console.log(this.$route.params)
         },
 
         methods : {
@@ -32,12 +33,43 @@
                 var map = new kakao.maps.Map(container, options); //마커추가하려면 객체를 아래와 같이 하나 만든다. 
                 var marker = new kakao.maps.Marker({ position: map.getCenter() }); 
                 marker.setMap(map); 
+                var that = this;
+                kakao.maps.event.addListener(map, 'idle', function() {
+                    
+                    console.log('hi');
+                    that.findBounds(map);
+                });
             }, 
             addScript() { 
                 const script = document.createElement('script'); /* global kakao */ 
                 script.onload = () => kakao.maps.load(this.initMap); 
                 script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a7578f58544246c17d8dbff43d4b7902'; 
                 document.head.appendChild(script); 
+            },
+            findBounds(map) {
+                var bounds = map.getBounds();
+                var sw = bounds.getSouthWest(); 
+                var ne = bounds.getNorthEast(); 
+                var swLat = sw.getLat();
+                var swLng = sw.getLng();
+                var neLat = ne.getLat();
+                var neLng = ne.getLng();
+
+                const params = new URLSearchParams();
+                params.append('swLat', swLat);
+                params.append('swLng', swLng);
+                params.append('neLat', neLat);
+                params.append('neLng', neLng);
+
+                // axios
+                //     .post("sdkjfsklfdslkf", params);
+                //     .then((res) => {
+                //         var markers = [];
+                //         res.forEach((mark) => {
+                //             markers.push(mark);
+                //         });
+
+                //     })
             }
         }
     }
