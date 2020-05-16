@@ -90,6 +90,7 @@
                         }) 
                     }
                     else if (res.data == "y"){
+                        this.$store.state.type = 0
                         router.push({ 
                             name: 'dashboard',
                             params: {

@@ -59,6 +59,7 @@ export default {
                 })
         },
         others() {
+            this.$store.state.type = 0
             var router = this.$router;
             const params = new URLSearchParams();
             console.log(this.$route.params);
