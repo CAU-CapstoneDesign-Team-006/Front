@@ -69,7 +69,8 @@ export default {
             axios
             .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
-                   router.push({
+                    this.$store.state.name = googleUser.getBasicProfile().Ad 
+                    router.push({
                        name: 'dashboard',
                        params: {
                                 'gmail' : this.$route.params.gmail,

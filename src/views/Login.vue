@@ -78,6 +78,7 @@
                     'Accept': 'application/json'}
                 }) 
                 .then(res => { 
+                    this.$store.state.name = googleUser.getBasicProfile().Ad 
                     console.log(res.data);
                     if (res.data == "g") {
                         router.push({ 
@@ -91,6 +92,7 @@
                     }
                     else if (res.data == "y"){
                         this.$store.state.type = 0
+                        this.$store.state.name = googleUser.getBasicProfile().Ad 
                         router.push({ 
                             name: 'dashboard',
                             params: {
