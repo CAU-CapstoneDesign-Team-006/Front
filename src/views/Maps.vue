@@ -77,7 +77,11 @@
                 var swLng = sw.getLng();
                 var neLat = ne.getLat();
                 var neLng = ne.getLng();
+<<<<<<< HEAD
                 var vm = this;
+=======
+
+>>>>>>> 7e53c3ad26dcd4138cbb1fba3aed274fd96277d8
                 const params = new URLSearchParams();
                 params.append('latitude0', swLat);
                 params.append('longitude0', swLng);
@@ -86,8 +90,14 @@
                 axios
                     .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/find', params) 
                     .then(res => { 
+<<<<<<< HEAD
                         vm.mks = res.data
                         for (var i in vm.mks){
+=======
+                        let mks = res.data;
+                        for (var i in mks){
+                            console.log(mks[i]);
+>>>>>>> 7e53c3ad26dcd4138cbb1fba3aed274fd96277d8
                             var marker = new kakao.maps.Marker({
                                 map: map,
                                 position: new kakao.maps.LatLng(vm.mks[i].latitude, vm.mks[i].longitude)
