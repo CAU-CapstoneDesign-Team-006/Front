@@ -1,9 +1,9 @@
 <template>
         <div class="row justify-content-center">
-            <div class="col-lg-5 col-md-6">
+            <div class="col-lg-8 col-md-6">
                 <div class="card bg-secondary shadow border-0">
 
-                    <div class="card-body px-lg-5 py-lg-6">
+                    <div class="card-body px-lg-5 py-lg-2">
 
                     </div>
                     <div class="card-header bg-transparent">
@@ -14,6 +14,9 @@
                             <div class="btn-wrapper text-center">
                                 <a href="#/dashboard" @click="soldier()"  class="soldier btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/soldier.png">
+                                </a>
+                                <a href='#/dashboard' @click="person()" class="person btn btn-neutral btn-icon btn-size">
+                                    <img src = "img/brand/person.png">
                                 </a>
                                 <a href='#/dashboard' @click="others()" class="others btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/manager.png">
@@ -56,6 +59,30 @@ export default {
                 })
                 .catch(ex =>{
                     console.log("bye");
+                })
+        },
+        person() {
+            this.$store.state.type = 2
+            var router = this.$router;
+            const params = new URLSearchParams();
+
+            params.append('gmail', this.$route.params.gmail)
+            params.append('name', this.$route.params.name)
+            params.append('type', 2)
+            axios
+            .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
+                .then(res => { 
+                    this.$store.state.name = googleUser.getBasicProfile().Ad 
+                    router.push({
+                       name: 'maps',
+                       params: {
+                                'gmail' : this.$route.params.gmail,
+                                'name' : this.$route.params.name,
+                                'type' : 'i'
+                            }
+                   })
+                })
+                .catch(ex =>{
                 })
         },
         others() {
