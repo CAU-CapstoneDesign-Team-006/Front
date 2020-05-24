@@ -15,9 +15,6 @@
                                 <a href="#/dashboard" @click="soldier()"  class="soldier btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/soldier.png">
                                 </a>
-                                <a href='#/dashboard' @click="person()" class="person btn btn-neutral btn-icon btn-size">
-                                    <img src = "img/brand/person.png">
-                                </a>
                                 <a href='#/dashboard' @click="others()" class="others btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/manager.png">
                                 </a>
