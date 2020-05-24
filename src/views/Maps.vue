@@ -2,8 +2,8 @@
     <div>
 
         <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+            <button></button>
         </base-header>
-
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
@@ -19,7 +19,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">상세정보</h5>
                 </template>
                 <div>
-                Cannot communicate with server
+                {{ exp }}
                 </div>
                 <template slot="footer">
                     <base-button type="secondary" @click="modals.modal0 = false">Close</base-button>
@@ -43,10 +43,11 @@
         },
         data() {
             return {
-                market : [],
+                mks : [],
                 modals: {
                     modal0 : false
-                }
+                },
+                exp : String
             }
         },
         methods : {
@@ -77,11 +78,7 @@
                 var swLng = sw.getLng();
                 var neLat = ne.getLat();
                 var neLng = ne.getLng();
-<<<<<<< HEAD
                 var vm = this;
-=======
-
->>>>>>> 7e53c3ad26dcd4138cbb1fba3aed274fd96277d8
                 const params = new URLSearchParams();
                 params.append('latitude0', swLat);
                 params.append('longitude0', swLng);
@@ -90,19 +87,18 @@
                 axios
                     .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/find', params) 
                     .then(res => { 
-<<<<<<< HEAD
                         vm.mks = res.data
                         for (var i in vm.mks){
-=======
-                        let mks = res.data;
-                        for (var i in mks){
-                            console.log(mks[i]);
->>>>>>> 7e53c3ad26dcd4138cbb1fba3aed274fd96277d8
-                            var marker = new kakao.maps.Marker({
+                            let marker = new kakao.maps.Marker({
                                 map: map,
-                                position: new kakao.maps.LatLng(vm.mks[i].latitude, vm.mks[i].longitude)
+                                position: new kakao.maps.LatLng(vm.mks[i].latitude, vm.mks[i].longitude),
+                                zIndex: i
                             });
-                            marker.setMap(map);
+                            kakao.maps.event.addListener(marker, 'click', function() {
+                                let temp = marker.getZIndex();
+                                vm.exp = vm.mks[temp].name + " : " + vm.mks[temp].information 
+                                vm.modals.modal0 = true;
+                            });
                         }
                     })
                     .catch(ex =>{
