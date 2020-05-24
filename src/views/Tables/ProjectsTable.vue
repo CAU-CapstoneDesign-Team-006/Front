@@ -192,19 +192,18 @@ import axios from 'axios'
       title: String
     },
     mounted() {
-        const params = new URLSearchParams();
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
           .then(res => {
             this.franchise = res.data;
           });
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
           .then(res => {
             this.card = res.data;
           });
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/accommodation', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/accommodation')
           .then(res => {
             this.accommodation = res.data;
           })
@@ -222,41 +221,36 @@ import axios from 'axios'
     
     methods : {
       vacation() {
-        const params = new URLSearchParams();
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
           .then(res => {
             this.franchise = res.data.filter((v) => {return v.category === '여가'});
-          })
+          });
       },
       dessert() {
-        const params = new URLSearchParams();
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
             .then(res => {
               this.franchise = res.data.filter((v) => {return v.category === '디저트'});
             })
       },
       restaurant() {
-        const params = new URLSearchParams();
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
             .then(res => {
               this.franchise = res.data.filter((v) => {return v.category === '음식점'});
             })
       },
       cafe() {
-        const params = new URLSearchParams();
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
             .then(res => {
               this.franchise = res.data.filter((v) => {return v.category === '카페'});
             })
       },
       all() {
-        const params = new URLSearchParams();
         axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise', params)
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
             .then(res => {
               this.franchise = res.data;
             })
