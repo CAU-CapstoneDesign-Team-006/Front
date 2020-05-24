@@ -103,6 +103,7 @@
                         }) // 해
                     }
                     else {
+                        console.log(googleUser.getBasicProfile())
                         router.push({ 
                             name: 'selectType',
                             params: {
