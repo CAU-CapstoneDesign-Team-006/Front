@@ -21,10 +21,10 @@
                             
                             <form class = "writing">
                                 <div style = "margin-bottom : 30px;">
-                                    <textarea class="form-control" id="titleArea" rows ="1" placeholder="Write Title here.."></textarea>
+                                    <textarea class="form-control" id="titleArea" v-model = "title" rows ="1" placeholder="Write Title here.."></textarea>
                                 </div>
                                 <div>
-                                    <textarea class="form-control" id="contentArea" rows = "10" placeholder="Write Content here.."></textarea>
+                                    <textarea class="form-control" id="contentArea" v-model = "content" rows = "10" placeholder="Write Content here.."></textarea>
                                 </div>
                             </form>
 
@@ -53,9 +53,9 @@
             update() {
                 var router = this.$router;
                 const params = new URLSearchParams();
-                params.append('name', this.$route.params.gmail);
-                params.append('title', this.titleArea);
-                params.append('content', this.contentArea);
+                params.append('name', this.$store.state.gmail);
+                params.append('title', this.title);
+                params.append('content', this.content);
                 var tempDate = new Date();
                 var tempYear = tempDate.getFullYear();
                 var tempMonth = (tempDate.getMonth() + 1);
