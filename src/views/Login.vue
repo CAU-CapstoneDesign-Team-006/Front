@@ -68,7 +68,7 @@
         onSuccess(googleUser) {
             var router = this.$router;
             const params = new URLSearchParams();
-            var gmail2 = googleUser.getBasicProfile().zu;
+            var gmail2 = googleUser.getBasicProfile().Eu;
             params.append('gmail', gmail2)
             axios
             // .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql', params) 
@@ -78,7 +78,8 @@
                     'Accept': 'application/json'}
                 }) 
                 .then(res => { 
-                    this.$store.state.name = googleUser.getBasicProfile().Ad 
+                    this.$store.state.gmail = googleUser.getBasicProfile().Eu;
+                    this.$store.state.name = googleUser.getBasicProfile().Bd;
                     console.log(res.data);
                     if (res.data == "g") {
                         router.push({ 
@@ -91,9 +92,8 @@
                         }) 
                     }
                     else if (res.data == "y"){
-                        this.$store.state.type = 0
-                        this.$store.state.name = googleUser.getBasicProfile().Ad 
-                        router.push({ 
+                        this.$store.state.type = 0;
+                        router.push({
                             name: 'dashboard',
                             params: {
                                 'gmail' : googleUser.getBasicProfile().Eu,
@@ -103,11 +103,12 @@
                         }) // 해
                     }
                     else {
+                        this.$store.state.type = 2;
                         router.push({ 
                             name: 'selectType',
                             params: {
-                                'gmail' : googleUser.getBasicProfile().zu ,
-                                'name' : googleUser.getBasicProfile().Ad
+                                'gmail' : googleUser.getBasicProfile().Eu ,
+                                'name' : googleUser.getBasicProfile().Bd
                             }
                         }) 
                     }
