@@ -42,7 +42,7 @@
                   {{row.name}}
                 </td>
                 <td class = "date">
-                    {{row.date}}
+                    {{row.date.slice(0, 10)}}
                 </td>
                 <td calss = "time">
                     {{row.time}}
