@@ -6,7 +6,7 @@
         <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col">
-                    <projects-table title="Board"></projects-table>
+                    <communication-table title="Communication"></communication-table>
                 </div>
             </div>
         </div>
@@ -14,11 +14,11 @@
     </div>
 </template>
 <script>
-  import ProjectsTable from './Tables/ProjectsTable'
+  import CommunicationTable from './Tables/CommunicationTable'
   export default {
-    name: 'tables',
+    name: 'table',
     components: { 
-      ProjectsTable
+      CommunicationTable
     }
   };
 </script>

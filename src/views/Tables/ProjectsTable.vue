@@ -1,10 +1,10 @@
 <template>
-  <div class="card shadow"
+  <div class="card shadow" 
        :class="type === 'dark' ? 'bg-default': ''">
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
-        <div class="col d-flex justify-content-between">
+        <div class="col d-flex justify-content-between" >
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
             Franchise
           </h3>
@@ -62,9 +62,9 @@
 
             </base-table>
           </div>
-
+      
       <div class="card-footer d-flex justify-content-end"
-          :class="type === 'dark' ? 'bg-transparent': ''">
+          :class="type === 'dark' ? 'bg-transparent': ''" style = "margin-bottom : 30px;">
         <base-pagination total= 1></base-pagination>
       </div>
     
@@ -117,7 +117,7 @@
         </div>
 
         <div class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent': ''">
+            :class="type === 'dark' ? 'bg-transparent': ''" style = "margin-bottom : 30px;">
           <base-pagination total= 1></base-pagination>
         </div>
       </div>

@@ -84,8 +84,8 @@
                         router.push({ 
                             name: 'maps',
                             params: {
-                                'gmail' : googleUser.getBasicProfile().zu,
-                                'name' : googleUser.getBasicProfile().Ad,
+                                'gmail' : googleUser.getBasicProfile().Eu,
+                                'name' : googleUser.getBasicProfile().Bd,
                                 'type' : 's'
                             }
                         }) 
@@ -96,14 +96,13 @@
                         router.push({ 
                             name: 'dashboard',
                             params: {
-                                'gmail' : googleUser.getBasicProfile().zu,
-                                'name' : googleUser.getBasicProfile().Ad,
+                                'gmail' : googleUser.getBasicProfile().Eu,
+                                'name' : googleUser.getBasicProfile().Bd,
                                 'type' : 'm'
                             }
                         }) // 해
                     }
                     else {
-                        console.log(googleUser.getBasicProfile())
                         router.push({ 
                             name: 'selectType',
                             params: {

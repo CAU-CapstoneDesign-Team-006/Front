@@ -15,6 +15,9 @@
                                 <a href="#/dashboard" @click="soldier()"  class="soldier btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/soldier.png">
                                 </a>
+                                <a href='#/dashboard' @click="person()" class="person btn btn-neutral btn-icon btn-size">
+                                    <img src = "img/brand/person.png">
+                                </a>
                                 <a href='#/dashboard' @click="others()" class="others btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/manager.png">
                                 </a>
@@ -42,7 +45,6 @@ export default {
             params.append('gmail', this.$route.params.gmail)
             params.append('name', this.$route.params.name)
             params.append('type', 1)
-            console.log(this.$route.params.gamil)
             axios
                 .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
@@ -70,7 +72,7 @@ export default {
             axios
             .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
-                    // this.$store.state.name = googleUser.getBasicProfile().Ad 
+                    this.$store.state.name = googleUser.getBasicProfile().Ad 
                     router.push({
                        name: 'maps',
                        params: {
@@ -94,7 +96,7 @@ export default {
             axios
             .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
-                    // this.$store.state.name = googleUser.getBasicProfile().Ad 
+                    this.$store.state.name = googleUser.getBasicProfile().Ad 
                     router.push({
                        name: 'dashboard',
                        params: {

@@ -39,6 +39,16 @@ export default new Router({
           path: '/tables',
           name: 'Board',
           component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
+        },
+        {
+          path: '/communication',
+          name: 'Communication',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Communication.vue')
+        },
+        {
+          path: '/communication/write',
+          name: 'write',
+          component: () => import(/* webpackChunkName: "demo" */ './views/write.vue')
         }
       ]
     },
