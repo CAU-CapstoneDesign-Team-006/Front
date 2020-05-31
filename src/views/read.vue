@@ -10,25 +10,28 @@
                             :class="type === 'dark' ? 'bg-default': ''">
                             <div class="card-header border-0"
                                 :class="type === 'dark' ? 'bg-transparent': ''">
-                            <div class="row align-items-center" style = "margin-bottom : 30px;">
+                            <div class="row align-items-center" style = "margin-bottom : 10px;">
                                 <div class="col d-flex justify-content-between" >
+                                <h2></h2>
                                 <h2 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
                                     {{this.title}}
                                 </h2>
                                 <h5>
-                                글쓴이 : {{this.name}}
-                                </h5>
-                                <h5> {{this.date.slice(0,10)}}
+                                {{this.date.slice(0,10)}}<p></p>
+                                글쓴이 : {{this.name}} 
                                 </h5>
                                 </div>
                             </div>
                             <div style = "align-items-right">
                                     
                             </div>
-                            <div>
-                                    {{this.content}}
+                            <div style = "border : 1px solid black; height : 400px; font-size : 20px; margin-bottom : 50px;">
+                                    <pre><strong>{{this.content}}</strong></pre>
                             </div>
-
+                            <div class = "d-flex justify-content-between">
+                            <base-button type = "primary" @click="update()">수정</base-button>
+                            <base-button type = "primary" @click="del()">삭제</base-button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,13 +47,13 @@
         data() {
             return {
                 no : null,
-                gmail : null,
-                name : null,
-                title : null,
-                content : null,
-                date : null,
-                time : null,
-                type : null
+                gmail : '',
+                name : '',
+                title : '',
+                content : '',
+                date : '',
+                time : '',
+                type : ''
             }
         },
         mounted() {
@@ -73,6 +76,38 @@
         },
 
         methods : {
+            update() {
+
+            },
+
+            del() {
+                var temp_gmail = this.$store.state.gmail;
+
+                if (this.gmail === temp_gmail) 
+                {
+                    var sure = prompt('"삭제"를 입력하면 삭제됩니다.');
+
+                    if (sure === "삭제")
+                    {
+                        var router = this.$router;
+                        const params = new URLSearchParams();
+                        params.append('no', this.no);
+                        axios
+                            .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/delete', params)
+                            .then(res => {
+                                alert('성공! 게시판으로 돌아갑니다.');
+
+                                router.push({
+                                    name : 'Communication'
+                                })
+
+
+                            })
+                    }
+                }
+                else
+                    alert('권한 없음');
+            }
             
         }
     }
