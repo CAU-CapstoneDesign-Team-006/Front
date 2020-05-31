@@ -75,7 +75,7 @@ import axios from 'axios'
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication')
           .then(res => {
-            this.communication = res.data.reverse();
+            this.communication = res.data.sort((a,b) => { return b.no - a.no;});
           });
       },
     data() {
@@ -96,34 +96,12 @@ import axios from 'axios'
         var params = new URLSearchParams();
         params.append('no', no);
 
-        axios
-          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/read', params)
-          .then(res => {
-              params.append('gmail', res.data.gmail);
-              params.append('name', res.data.name);
-              params.append('title', res.data.title);
-              params.append('content', res.data.content);
-              params.append('date', res.data.date);
-              params.append('time', res.data.time);
-              params.append('type', res.data.type);
-
-              console.log(no);
-              console.log(params);
-
-              router.push({
-                name : 'read',
-                params : {
-                  'no' : params.no,
-                  'gmail' : params.gmail,
-                  'name' : params.name,
-                  'title' : params.title,
-                  'content' : params.content,
-                  'date' : params.date,
-                  'time' : params.time,
-                  'type' : params.type
-              }
-            });
-          });
+        router.push({
+          name : 'read',
+          params : {
+            'no' : no
+          }
+        });
         
       }
     }

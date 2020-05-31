@@ -10,18 +10,27 @@
                             :class="type === 'dark' ? 'bg-default': ''">
                             <div class="card-header border-0"
                                 :class="type === 'dark' ? 'bg-transparent': ''">
-                            <div class="row align-items-center" style = "margin-bottom : 30px;">
+                            <div class="row align-items-center" style = "margin-bottom : 10px;">
                                 <div class="col d-flex justify-content-between" >
-                                <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
+                                <h2></h2>
+                                <h2 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
                                     {{this.title}}
-                                </h3>
+                                </h2>
+                                <h5>
+                                {{this.date.slice(0,10)}}<p></p>
+                                글쓴이 : {{this.name}} 
+                                </h5>
                                 </div>
                             </div>
-                            <div>
-                                    {{this.name}}
+                            <div style = "align-items-right">
+                                    
                             </div>
-                            <div>
-                                    {{this.content}}
+                            <div style = "border : 1px solid black; height : 400px; font-size : 20px; margin-bottom : 50px;">
+                                    <pre><strong>{{this.content}}</strong></pre>
+                            </div>
+                            <div class = "d-flex justify-content-between">
+                            <base-button type = "primary" @click="update()">수정</base-button>
+                            <base-button type = "primary" @click="del()">삭제</base-button>
                             </div>
                         </div>
                     </div>
@@ -37,29 +46,99 @@
     export default {
         data() {
             return {
-                no : this.$route.params.no,
-                gmail : this.$route.params.gmail,
-                name : this.$route.params.name,
-                title : this.$route.params.name,
-                content : null,
-                date : null,
-                time : null,
-                type : null
+                no : null,
+                gmail : '',
+                name : '',
+                title : '',
+                content : '',
+                date : '',
+                time : '',
+                type : ''
             }
         },
-        // mounted() {
+        mounted() {
+            var params = new URLSearchParams();
+            params.append('no', this.$route.params.no);
 
-        //     this.no = this.$route.params.no;
-        //     this.gmail = this.$route.params.gmail;
-        //     this.name = this.$route.params.name;
-        //     this.title = this.$route.params.title;
-        //     this.content = this.$route.params.content;
-        //     this.date = this.$route.params.date;
-        //     this.time = this.$route.params.time;
-        //     this.type = this.$route.params.type;
-        // },
+            axios
+              .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/read', params)
+              .then(res => {
+                  this.no = res.data[0].no;
+                  this.gmail = res.data[0].gmail;
+                  this.name = res.data[0].name;
+                  this.title = res.data[0].title;
+                  this.content = res.data[0].content;
+                  this.date = res.data[0].date;
+                  this.time = res.data[0].time;
+                  this.type = res.data[0].type;
+
+            });
+        },
 
         methods : {
+            update() {
+                var temp_gmail = this.$store.state.gmail;
+
+                if (this.gmail === temp_gmail)
+                {
+                    var router = this.$router;
+                    const params = new URLSearchParams();
+                    params.append('no', this.no);
+                    params.append('title', this.title);
+                    params.append('content', this.content);
+                    params.append('date', this.date);
+                    params.append('time', this.time);
+
+                    axios
+                        .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/update', params)
+                        .then(res => {
+                            alert('수정 페이지로 이동합니다.');
+
+                            router.push({
+                                name : 'update',
+                                params : {
+                                    'no' : this.no,
+                                    'title' : this.title,
+                                    'content' : this.content,
+                                    'date' : this.date,
+                                    'time' : this.time
+                                }
+                            })
+                        })
+                }
+                else 
+                    alert('권한 없음');
+
+            },
+
+            del() {
+                var temp_gmail = this.$store.state.gmail;
+
+                if (this.gmail === temp_gmail) 
+                {
+                    var sure = prompt('"삭제"를 입력하면 삭제됩니다.');
+
+                    if (sure === "삭제")
+                    {
+                        var router = this.$router;
+                        const params = new URLSearchParams();
+                        params.append('no', this.no);
+                        axios
+                            .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/delete', params)
+                            .then(res => {
+                                alert('성공! 게시판으로 돌아갑니다.');
+
+                                router.push({
+                                    name : 'Communication'
+                                })
+
+
+                            })
+                    }
+                }
+                else
+                    alert('권한 없음');
+            }
             
         }
     }

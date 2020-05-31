@@ -17,9 +17,11 @@
               </a>
               <template>
                 <a class="dropdown-item" @click = "vacation()">여가</a>
-                <a class="dropdown-item" @click = "dessert()">디저트</a>
                 <a class="dropdown-item" @click = "restaurant()">음식점</a>
-                <a class="dropdown-item" @click = "cafe()">카페</a>
+                <a class="dropdown-item" @click = "coffee()">커피</a>
+                <a class="dropdown-item" @click = "icecream()">아이스크림</a>
+                <a class="dropdown-item" @click = "bakery()">제과</a>
+                <a class="dropdown-item" @click = "donut()">도넛</a>                
                 <a class="dropdown-item" @click = "all()">모두보기</a>                
               </template>
             </base-dropdown>
@@ -72,14 +74,29 @@
       <div class="card shadow"
         :class="type === 'dark' ? 'bg-default': ''">
         <div class="card-header border-0"
-            :class="type === 'dark' ? 'bg-transparent': ''">
-            <div class="row align-items-center">
-              <div class="col d-flex justify-content-between">
-                <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-                  Card
-                </h3>
-              </div>
-            </div>
+         :class="type === 'dark' ? 'bg-transparent': ''">
+      <div class="row align-items-center">
+        <div class="col d-flex justify-content-between" >
+          <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
+            Card
+          </h3>
+          <h4>
+            Search
+            <base-dropdown class="dropdown"
+                           position="right">
+              <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+              <template>
+                <a class="dropdown-item" @click = "KBcard()">KB국민카드</a>
+                <a class="dropdown-item" @click = "IBKcard()">IBK기업카드</a>
+                <a class="dropdown-item" @click = "allcard()">모두보기</a>                
+              </template>
+            </base-dropdown>
+            
+          </h4>
+        </div>
+      </div>
         </div>
 
         <div class="table-responsive">
@@ -218,7 +235,6 @@ import axios from 'axios'
         ]
       }
     },
-    
     methods : {
       vacation() {
         axios
@@ -227,25 +243,39 @@ import axios from 'axios'
             this.franchise = res.data.filter((v) => {return v.category === '여가'});
           });
       },
-      dessert() {
-        axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
-            .then(res => {
-              this.franchise = res.data.filter((v) => {return v.category === '디저트'});
-            })
-      },
       restaurant() {
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
-            .then(res => {
-              this.franchise = res.data.filter((v) => {return v.category === '음식점'});
-            })
+          .then(res => {
+            this.franchise = res.data.filter((v) => {return v.category === '음식점'});
+          });
       },
-      cafe() {
+      coffee() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
+          .then(res => {
+            this.franchise = res.data.filter((v) => {return v.category === '커피'});
+          });
+      },            
+      icecream() {
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
             .then(res => {
-              this.franchise = res.data.filter((v) => {return v.category === '카페'});
+              this.franchise = res.data.filter((v) => {return v.category === '아이스크림'});
+            })
+      },
+      bakery() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
+            .then(res => {
+              this.franchise = res.data.filter((v) => {return v.category === '제과'});
+            })
+      },
+      donut() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
+            .then(res => {
+              this.franchise = res.data.filter((v) => {return v.category === '도넛'});
             })
       },
       all() {
@@ -254,9 +284,29 @@ import axios from 'axios'
             .then(res => {
               this.franchise = res.data;
             })
-      }
+      },
+      KBcard() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
+            .then(res => {
+              this.card = res.data.filter((v) => {return v.cardname === 'KB나라사랑카드'});
+            })
+      },
+      IBKcard() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
+            .then(res => {
+              this.card = res.data.filter((v) => {return v.cardname === 'IBK나라사랑카드'});
+            })
+      },
+      allcard() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
+            .then(res => {
+              this.card = res.data;
+            })
+      },
     }
-
   }
 </script>
 <style>
