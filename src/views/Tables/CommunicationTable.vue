@@ -75,7 +75,7 @@ import axios from 'axios'
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication')
           .then(res => {
-            this.communication = res.data.reverse();
+            this.communication = res.data.sort((a,b) => { return b.no - a.no;});
           });
       },
     data() {
