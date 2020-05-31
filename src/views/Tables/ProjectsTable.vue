@@ -17,9 +17,11 @@
               </a>
               <template>
                 <a class="dropdown-item" @click = "vacation()">여가</a>
-                <a class="dropdown-item" @click = "dessert()">디저트</a>
                 <a class="dropdown-item" @click = "restaurant()">음식점</a>
-                <a class="dropdown-item" @click = "cafe()">카페</a>
+                <a class="dropdown-item" @click = "coffee()">커피</a>
+                <a class="dropdown-item" @click = "icecream()">아이스크림</a>
+                <a class="dropdown-item" @click = "bakery()">제과</a>
+                <a class="dropdown-item" @click = "donut()">도넛</a>                
                 <a class="dropdown-item" @click = "all()">모두보기</a>                
               </template>
             </base-dropdown>
@@ -218,7 +220,6 @@ import axios from 'axios'
         ]
       }
     },
-    
     methods : {
       vacation() {
         axios
@@ -227,25 +228,39 @@ import axios from 'axios'
             this.franchise = res.data.filter((v) => {return v.category === '여가'});
           });
       },
-      dessert() {
-        axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
-            .then(res => {
-              this.franchise = res.data.filter((v) => {return v.category === '디저트'});
-            })
-      },
       restaurant() {
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
-            .then(res => {
-              this.franchise = res.data.filter((v) => {return v.category === '음식점'});
-            })
+          .then(res => {
+            this.franchise = res.data.filter((v) => {return v.category === '음식점'});
+          });
       },
-      cafe() {
+      coffee() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
+          .then(res => {
+            this.franchise = res.data.filter((v) => {return v.category === '커피'});
+          });
+      },            
+      icecream() {
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
             .then(res => {
-              this.franchise = res.data.filter((v) => {return v.category === '카페'});
+              this.franchise = res.data.filter((v) => {return v.category === '아이스크림'});
+            })
+      },
+      bakery() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
+            .then(res => {
+              this.franchise = res.data.filter((v) => {return v.category === '제과'});
+            })
+      },
+      donut() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
+            .then(res => {
+              this.franchise = res.data.filter((v) => {return v.category === '도넛'});
             })
       },
       all() {
