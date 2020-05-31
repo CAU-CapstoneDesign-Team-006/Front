@@ -49,6 +49,11 @@ export default new Router({
           path: '/communication/write',
           name: 'write',
           component: () => import(/* webpackChunkName: "demo" */ './views/write.vue')
+        },
+        {
+          path: '/communication/read',
+          name: 'read',
+          component: () => import(/* webpackChunkName: "demo" */ './views/read.vue')
         }
       ]
     },

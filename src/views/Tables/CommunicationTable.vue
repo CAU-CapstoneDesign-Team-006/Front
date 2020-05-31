@@ -36,7 +36,7 @@
                   </div>
                 </th>
                 <td class="title">
-                  <a href="http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/read/:no">{{row.title}}</a>
+                  <a style = "cursor:pointer" @click = "read(row.no)">{{row.title}}</a>
                 </td>
                 <td class ="name">
                   {{row.name}}
@@ -90,6 +90,41 @@ import axios from 'axios'
         router.push({
             name : 'write'
         })
+      },
+      read(no) {
+        var router = this.$router;
+        var params = new URLSearchParams();
+        params.append('no', no);
+
+        axios
+          .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/read', params)
+          .then(res => {
+              params.append('gmail', res.data.gmail);
+              params.append('name', res.data.name);
+              params.append('title', res.data.title);
+              params.append('content', res.data.content);
+              params.append('date', res.data.date);
+              params.append('time', res.data.time);
+              params.append('type', res.data.type);
+
+              console.log(no);
+              console.log(params);
+
+              router.push({
+                name : 'read',
+                params : {
+                  'no' : params.no,
+                  'gmail' : params.gmail,
+                  'name' : params.name,
+                  'title' : params.title,
+                  'content' : params.content,
+                  'date' : params.date,
+                  'time' : params.time,
+                  'type' : params.type
+              }
+            });
+          });
+        
       }
     }
     
