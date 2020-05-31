@@ -54,6 +54,11 @@ export default new Router({
           path: '/communication/read',
           name: 'read',
           component: () => import(/* webpackChunkName: "demo" */ './views/read.vue')
+        },
+        {
+          path: '/communication/update',
+          name: 'update',
+          component: () => import(/* webpackChunkName: "demo" */ './views/update.vue')
         }
       ]
     },

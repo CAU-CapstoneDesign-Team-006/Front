@@ -77,6 +77,37 @@
 
         methods : {
             update() {
+                var temp_gmail = this.$store.state.gmail;
+
+                if (this.gmail === temp_gmail)
+                {
+                    var router = this.$router;
+                    const params = new URLSearchParams();
+                    params.append('no', this.no);
+                    params.append('title', this.title);
+                    params.append('content', this.content);
+                    params.append('date', this.date);
+                    params.append('time', this.time);
+
+                    axios
+                        .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/update', params)
+                        .then(res => {
+                            alert('수정 페이지로 이동합니다.');
+
+                            router.push({
+                                name : 'update',
+                                params : {
+                                    'no' : this.no,
+                                    'title' : this.title,
+                                    'content' : this.content,
+                                    'date' : this.date,
+                                    'time' : this.time
+                                }
+                            })
+                        })
+                }
+                else 
+                    alert('권한 없음');
 
             },
 
