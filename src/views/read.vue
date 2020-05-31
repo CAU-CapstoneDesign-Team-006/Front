@@ -12,17 +12,23 @@
                                 :class="type === 'dark' ? 'bg-transparent': ''">
                             <div class="row align-items-center" style = "margin-bottom : 30px;">
                                 <div class="col d-flex justify-content-between" >
-                                <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
+                                <h2 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
                                     {{this.title}}
-                                </h3>
+                                </h2>
+                                <h5>
+                                글쓴이 : {{this.name}}
+                                </h5>
+                                <h5> {{this.date.slice(0,10)}}
+                                </h5>
                                 </div>
                             </div>
-                            <div>
-                                    {{this.name}}
+                            <div style = "align-items-right">
+                                    
                             </div>
                             <div>
                                     {{this.content}}
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -37,27 +43,34 @@
     export default {
         data() {
             return {
-                no : this.$route.params.no,
-                gmail : this.$route.params.gmail,
-                name : this.$route.params.name,
-                title : this.$route.params.name,
+                no : null,
+                gmail : null,
+                name : null,
+                title : null,
                 content : null,
                 date : null,
                 time : null,
                 type : null
             }
         },
-        // mounted() {
+        mounted() {
+            var params = new URLSearchParams();
+            params.append('no', this.$route.params.no);
 
-        //     this.no = this.$route.params.no;
-        //     this.gmail = this.$route.params.gmail;
-        //     this.name = this.$route.params.name;
-        //     this.title = this.$route.params.title;
-        //     this.content = this.$route.params.content;
-        //     this.date = this.$route.params.date;
-        //     this.time = this.$route.params.time;
-        //     this.type = this.$route.params.type;
-        // },
+            axios
+              .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/read', params)
+              .then(res => {
+                  this.no = res.data[0].no;
+                  this.gmail = res.data[0].gmail;
+                  this.name = res.data[0].name;
+                  this.title = res.data[0].title;
+                  this.content = res.data[0].content;
+                  this.date = res.data[0].date;
+                  this.time = res.data[0].time;
+                  this.type = res.data[0].type;
+
+            });
+        },
 
         methods : {
             
