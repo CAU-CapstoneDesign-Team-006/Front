@@ -74,14 +74,29 @@
       <div class="card shadow"
         :class="type === 'dark' ? 'bg-default': ''">
         <div class="card-header border-0"
-            :class="type === 'dark' ? 'bg-transparent': ''">
-            <div class="row align-items-center">
-              <div class="col d-flex justify-content-between">
-                <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-                  Card
-                </h3>
-              </div>
-            </div>
+         :class="type === 'dark' ? 'bg-transparent': ''">
+      <div class="row align-items-center">
+        <div class="col d-flex justify-content-between" >
+          <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
+            Card
+          </h3>
+          <h4>
+            Search
+            <base-dropdown class="dropdown"
+                           position="right">
+              <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+              <template>
+                <a class="dropdown-item" @click = "KBcard()">KB국민카드</a>
+                <a class="dropdown-item" @click = "IBKcard()">IBK기업카드</a>
+                <a class="dropdown-item" @click = "allcard()">모두보기</a>                
+              </template>
+            </base-dropdown>
+            
+          </h4>
+        </div>
+      </div>
         </div>
 
         <div class="table-responsive">
@@ -269,9 +284,29 @@ import axios from 'axios'
             .then(res => {
               this.franchise = res.data;
             })
-      }
+      },
+      KBcard() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
+            .then(res => {
+              this.card = res.data.filter((v) => {return v.cardname === 'KB나라사랑카드'});
+            })
+      },
+      IBKcard() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
+            .then(res => {
+              this.card = res.data.filter((v) => {return v.cardname === 'IBK나라사랑카드'});
+            })
+      },
+      allcard() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
+            .then(res => {
+              this.card = res.data;
+            })
+      },
     }
-
   }
 </script>
 <style>
