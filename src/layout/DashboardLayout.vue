@@ -10,9 +10,12 @@
 
         <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
 
-        <sidebar-item :link="{name: 'Board', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>
+        <sidebar-item :link="{name: 'Board', icon: 'ni ni-bullet-list-67 text-yellow', path: '/tables'}"/>
 
         <sidebar-item :link="{name : 'Communication', icon: 'ni ni-chat-round text-blue', path :'/communication'}"/>
+        
+        <sidebar-item :link="{name: 'HOT HOT HOT !!!', icon: 'ni ni-favourite-28 text-red', path : '/hotBoard'}"/>
+
         <div v-if="this.$store.state.type == 0">
           <sidebar-item
             :link="{

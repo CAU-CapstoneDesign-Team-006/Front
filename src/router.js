@@ -59,6 +59,11 @@ export default new Router({
           path: '/communication/update',
           name: 'update',
           component: () => import(/* webpackChunkName: "demo" */ './views/update.vue')
+        },
+        {
+          path: '/hotBoard',
+          name: 'hotBoard',
+          component: () => import(/* webpackChunkName: "demo" */ './views/hotBoard.vue')
         }
       ]
     },

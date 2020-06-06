@@ -1,24 +1,22 @@
 <template>
-  <div class="card shadow" 
+    <div class="card shadow" 
        :class="type === 'dark' ? 'bg-default': ''">
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
         <div class="col d-flex justify-content-between" >
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            Communication
+            Hot Hot Hot
           </h3>
-          <base-button type = "primary" @click="write()">작성</base-button>
         </div>
       </div>
     </div>
-
-<div class="table-responsive">
+    <div class="table-responsive">
       <base-table class="table align-items-center table-flush"
                   :class="type === 'dark' ? 'table-dark': ''"
                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
                   tbody-classes="list"
-                  :data="communication">
+                  :data="hotList">
               <template slot="columns">
                 <th>No.</th>
                 <th>Title</th>
@@ -58,14 +56,12 @@
           :class="type === 'dark' ? 'bg-transparent': ''" style = "margin-bottom : 30px;">
         <base-pagination total= 1></base-pagination>
       </div>
-        
       </div>
-      
 </template>
 <script>
 import axios from 'axios'
   export default {
-    name: 'communication-table',
+    name: 'hot-board-table',
     props: {
       type: {
         type: String
@@ -75,23 +71,19 @@ import axios from 'axios'
     mounted() {
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication')
-          .then(res => {
-            this.communication = res.data.sort((a,b) => { return b.no - a.no;});
+          .then(res => {            
+                this.hotList = res.data
+                                    .filter((v) => { return v.best >= 2; })
+                                    .sort((a,b) => { return b.no - a.no; });
           });
       },
     data() {
       return {
-        communication: [
+        hotList : [
         ]
       }
     },
     methods : {
-      write() {
-        var router = this.$router;
-        router.push({
-            name : 'write'
-        })
-      },
       read(no) {
         var router = this.$router;
         var params = new URLSearchParams();
@@ -106,9 +98,5 @@ import axios from 'axios'
         
       }
     }
-    
-
   }
 </script>
-<style>
-</style>
