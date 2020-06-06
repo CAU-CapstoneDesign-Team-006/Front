@@ -12,7 +12,7 @@
                                 :class="type === 'dark' ? 'bg-transparent': ''">
                             <div class="row align-items-center" style = "margin-bottom : 10px;">
                                 <div class="col d-flex justify-content-between" >
-                                <h2></h2>
+                                <h2 @click="best()"><img src = "img/brand/full.png"> {{this.best}} </h2>
                                 <h2 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
                                     {{this.title}}
                                 </h2>
@@ -53,7 +53,8 @@
                 content : '',
                 date : '',
                 time : '',
-                type : ''
+                type : '',
+                best : 0
             }
         },
         mounted() {
@@ -71,7 +72,7 @@
                   this.date = res.data[0].date;
                   this.time = res.data[0].time;
                   this.type = res.data[0].type;
-
+                  this.best = res.data[0].best;
             });
         },
 
@@ -138,8 +139,18 @@
                 }
                 else
                     alert('권한 없음');
+            },
+
+            best() {
+                var best = this.best + 1;
+                const params = new URLSearchParams();
+                params.append('best', best);
+                axios
+                    .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication', params)
+                    .then(res => {
+                        this.best = res.data[0].best;
+                    });
             }
-            
         }
     }
 </script>
