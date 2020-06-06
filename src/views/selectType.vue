@@ -62,7 +62,7 @@ export default {
                 })
         },
         person() {
-            this.$store.state.type = 2
+            this.$store.commit('type', 2);
             var router = this.$router;
             const params = new URLSearchParams();
 
@@ -72,7 +72,7 @@ export default {
             axios
             .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
-                    this.$store.state.name = googleUser.getBasicProfile().Ad 
+                    this.$store.commit('name', googleUser.getBasicProfile().Bd);
                     router.push({
                        name: 'maps',
                        params: {
@@ -86,7 +86,7 @@ export default {
                 })
         },
         others() {
-            this.$store.state.type = 0
+            this.$store.commit('type', 0);
             var router = this.$router;
             const params = new URLSearchParams();
             console.log(this.$route.params);
@@ -96,7 +96,7 @@ export default {
             axios
             .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/mysql/insert', params) 
                 .then(res => { 
-                    this.$store.state.name = googleUser.getBasicProfile().Ad 
+                    this.$store.commit('name', googleUser.getBasicProfile().Bd);
                     router.push({
                        name: 'storeinsert',
                        params: {

@@ -46,7 +46,7 @@
     export default {
         mounted() {
             window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
-            // console.log(this.$route.params)    
+            // console.log(this.$route.params)   
         },
         components: {
             modal
@@ -76,7 +76,6 @@
             initMap() {
                 var vm = this;
                 var container = document.getElementById('map-canvas');
-                
                 var options = { 
                     center: new kakao.maps.LatLng(vm.lat, vm.lon), 
                     level: 3 

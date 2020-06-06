@@ -15,7 +15,7 @@
                                 <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
                                     Write
                                 </h3>
-                                <base-button type = "primary" @click="update()">완료</base-button>
+                                <base-button type = "primary" @click="write()">완료</base-button>
                                 </div>
                             </div>
                             
@@ -51,7 +51,7 @@
         },
 
         methods : {
-            update() {
+            write() {
                 var router = this.$router;
                 const params = new URLSearchParams();
                 params.append('name', this.$store.state.gmail);

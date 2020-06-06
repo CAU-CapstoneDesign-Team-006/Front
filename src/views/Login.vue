@@ -77,10 +77,9 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'}
                 }) 
-                .then(res => { 
-                    this.$store.state.gmail = googleUser.getBasicProfile().Eu;
-                    this.$store.state.name = googleUser.getBasicProfile().Bd;
-                    console.log(res.data);
+                .then(res => {
+                    this.$store.commit('gmail', googleUser.getBasicProfile().Eu);
+                    this.$store.commit('name', googleUser.getBasicProfile().Bd);
                     if (res.data == "g") {
                         router.push({ 
                             name: 'maps',
@@ -92,7 +91,7 @@
                         }) 
                     }
                     else if (res.data == "y"){
-                        this.$store.state.type = 0;
+                        this.$store.commit('type', 0);
                         router.push({
                             name: 'dashboard',
                             params: {
@@ -103,7 +102,7 @@
                         }) // 해
                     }
                     else {
-                        this.$store.state.type = 2;
+                        this.$store.commit('type', 2);
                         router.push({ 
                             name: 'selectType',
                             params: {
