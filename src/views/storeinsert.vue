@@ -9,29 +9,19 @@
                     <div class="btn-wrapper text-center">
                     </div>
                 </div>
+                
                 <div class="card-body px-lg-5 py-lg-5">
+
                     <form role="form">
-                        <h3>
-                        Category
-                        <base-dropdown class="dropdown"
-                                    position="right">
-                        <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <template>
-                            <a class="dropdown-item">여가</a>
-                            <a class="dropdown-item">음식점</a>
-                            <a class="dropdown-item">커피</a>
-                            <a class="dropdown-item">아이스크림</a>
-                            <a class="dropdown-item">제과</a>
-                            <a class="dropdown-item">도넛</a>                
-                        </template>
-                        </base-dropdown>
-                        </h3>
 
                         <base-input class="input-group-alternative mb-3"
-                                    placeholder="name"
+                                    placeholder="store name"
                                     v-model="model.name">
+                        </base-input>
+
+                        <base-input class="input-group-alternative mb-3"
+                                    placeholder="address"
+                                    v-model="model.address">
                         </base-input>
 
                         <base-input class="input-group-alternative mb-3"
@@ -41,8 +31,7 @@
 
                         <base-input class="input-group-alternative"
                                     placeholder="information"
-                                    v-model="model.inforation"
-                                    style="width:350px;height:200px">
+                                    v-model="model.inforation">
                         </base-input>
 
                         <div class="text-center">
@@ -55,8 +44,9 @@
     </div>
 </template>
 <script>
+
   export default {
-    name: 'register',
+    name: 'storeinsert',
     data() {
       return {
         model: {
@@ -66,8 +56,13 @@
           information: ''
         }
       }
-    }
+    },
+
+
   }
+
+  
+  
 </script>
 <style>
 </style>
