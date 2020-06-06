@@ -81,6 +81,11 @@ export default new Router({
           path : '/selectType',
           name : 'selectType',
           component: () => import(/* webpackChunckName: "demo" */ './views/selectType.vue')
+        },
+        {
+          path : '/storeinsert',
+          name : 'storeinsert',
+          component: () => import(/* webpackChunckName: "demo" */ './views/storeinsert.vue')
         }
       ]
     }
