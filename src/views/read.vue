@@ -169,6 +169,8 @@
                     axios
                         .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/pushbest', params)
                         .then(res => {
+                            console.log('f')
+                            console.log(res.data);
                             if (res.data === 'done') {
                                 myimage.src = "img/brand/full.png"; 
                                 this.best += 1;
@@ -182,6 +184,8 @@
                     axios
                         .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/deletebest', params)
                         .then(res => {
+                            console.log('t')
+                            console.log(res.data)
                             if (res.data === 'done') {
                                 myimage.src = "img/brand/empty.png";
                                 this.best -= 1;
