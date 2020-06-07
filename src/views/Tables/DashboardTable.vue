@@ -74,6 +74,14 @@ import axios from 'axios'
           .then(res => {
             console.log(res.data);
             this.store = res.data;
+            // if (res.data.length === 0)
+            //                   {
+            //                     var router = this.$router;
+            //                     router.push({
+            //                       name : 'InsertStore',
+            //                       gmail : temp_gmail
+            //                     })
+            //                   }
           });
       },
     data() {
@@ -121,19 +129,18 @@ import axios from 'axios'
                         alert('삭제 완료');
                         var temp_params = new URLSearchParams();
                         temp_params.append('gmail', temp_gmail);
-
                         axios
                             .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store', temp_params)
                             .then(res => {
                               this.store = res.data;
-                              if (res.data.length === 0)
-                              {
-                                var router = this.$router;
-                                router.push({
-                                  name : 'InsertStore',
-                                  gmail : temp_gmail
-                                })
-                              }
+                              // if (res.data.length === 0)
+                              // {
+                              //   var router = this.$router;
+                              //   router.push({
+                              //     name : 'InsertStore',
+                              //     gmail : temp_gmail
+                              //   })
+                              // }
                         });
                     }
               });
