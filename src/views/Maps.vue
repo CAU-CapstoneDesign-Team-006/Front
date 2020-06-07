@@ -62,11 +62,11 @@
                 markers: [],
                 filter: "all",
                 category: {
-                    '도넛' : 'img/icons/iconmonstr-candy-9-64.png',
-                    '커피' : 'img/icons/iconmonstr-coffee-1-64.png',
-                    '아이스크림' : 'img/icons/iconmonstr-candy-25-64.png',
-                    '음식점' : 'img/icons/iconmonstr-eat-2-64.png',
-                    '여가' : 'img/icons/iconmonstr-video-8-64.png',
+                    '도넛' : 'img/icons/donut.png',
+                    '커피' : 'img/icons/coffee.png',
+                    '아이스크림' : 'img/icons/ice.png',
+                    '음식점' : 'img/icons/rest.png',
+                    '여가' : 'img/icons/movie.png',
                 },
                 lat : 37.564214,
                 lon : 127.001699
@@ -100,7 +100,7 @@
             addScript() { 
                 const script = document.createElement('script'); /* global kakao */ 
                 script.onload = () => kakao.maps.load(this.initMap); 
-                script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a7578f58544246c17d8dbff43d4b7902'; 
+                script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a7578f58544246c17d8dbff43d4b7902&libraries=services'; 
                 document.head.appendChild(script); 
             },
             fetchMarker(map) {
@@ -127,8 +127,8 @@
                         vm.markers = [];
                         for (var i in vm.mks){
                             var imageSrc = vm.category[vm.mks[i].category], // 마커이미지의 주소입니다    
-                            imageSize = new kakao.maps.Size(26, 26), // 마커이미지의 크기입니다
-                            imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                            imageSize = new kakao.maps.Size(47, 47), // 마커이미지의 크기입니다
+                            imageOption = {offset: new kakao.maps.Point(47, 47)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
                             let marker = new kakao.maps.Marker({
                                 map: map,

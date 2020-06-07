@@ -86,7 +86,7 @@ import axios from 'axios'
       insertStore() {
         var router = this.$router;
         router.push({
-            name : 'storeinsert'
+            name : 'InsertStore'
         })
       },
 
@@ -130,7 +130,7 @@ import axios from 'axios'
                               {
                                 var router = this.$router;
                                 router.push({
-                                  name : 'storeinsert',
+                                  name : 'InsertStore',
                                   gmail : temp_gmail
                                 })
                               }
