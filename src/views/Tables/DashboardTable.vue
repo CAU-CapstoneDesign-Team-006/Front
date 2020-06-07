@@ -20,7 +20,6 @@
                   tbody-classes="list"
                   :data="store">
               <template slot="columns">
-                <th>No.</th>
                 <th>StoreName</th>
                 <th>Information</th>
                 <th>Address</th>
@@ -28,15 +27,9 @@
               </template>
 
               <template slot-scope="{row}">
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <div class="media-body">
-                      <span class="name mb-0 text-sm">{{row.no}}</span>
-                    </div>
-                  </div>
-                </th>
+                
                 <td class="storeName">
-                  <a style = "cursor:pointer" @click = "readStore(row.no)">{{row.storename}}</a>
+                  <a style = "cursor:pointer" @click = "readStore(row.storename)">{{row.storename}}</a>
                 </td>
                 <td class ="information">
                     {{row.information}}
@@ -97,11 +90,11 @@ import axios from 'axios'
         })
       },
 
-      readStore(no) {
+      readStore(storename) {
         var router = this.$router;
         var params = new URLSearchParams();
-        params.append('no', no);
-        console.log(no);
+        params.append('storename', storename);
+        console.log(storename);
 
 
         // router.push({
@@ -124,24 +117,25 @@ import axios from 'axios'
           axios
               .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/delete', params)
               .then(res => {
-                    if (res.data === 'done')
+                    if (res.data === 'done') {
                         alert('삭제 완료');
-                    var temp_params = new URLSearchParams();
-                    temp_params.append('gmail', temp_gmail);
+                        var temp_params = new URLSearchParams();
+                        temp_params.append('gmail', temp_gmail);
 
-                    axios
-                        .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store', temp_params)
-                        .then(res => {
-                          this.store = res.data;
-                          if (res.data.length === 0)
-                          {
-                            var router = this.$router;
-                            router.push({
-                              name : 'storeinsert',
-                              gmail : temp_gmail
-                            })
-                          }
-                        })
+                        axios
+                            .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store', temp_params)
+                            .then(res => {
+                              this.store = res.data;
+                              if (res.data.length === 0)
+                              {
+                                var router = this.$router;
+                                router.push({
+                                  name : 'storeinsert',
+                                  gmail : temp_gmail
+                                })
+                              }
+                        });
+                    }
               });
       }
     }
