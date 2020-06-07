@@ -58,17 +58,17 @@
                 params.append('title', this.title);
                 params.append('content', this.content);
                 var tempDate = new Date();
-                var tempYear = tempDate.getFullYear();
-                var tempMonth = (tempDate.getMonth() + 1);
-                var tempDay = tempDate.getDay();
-                if (tempDay === 0) tempDay = 31;
-                params.append('date', tempYear + '.' + (tempMonth < 10 ? '0' + tempMonth : tempMonth) + '.' + (tempDay < 10 ? '0' + tempDay : tempDay));
+                var Year = tempDate.getFullYear();
+                var Month = "" + (tempDate.getMonth()+1);
+                var Day = "" + tempDate.getDate();   
+                if(Month.length < 2) Month = "0" + Month;
+                if(Day.length < 2) Day = "0" + Day;
+                var today = Year.toString() + '-' + Month + '-' + Day;
+                params.append('date', today);
                 var tempHour = tempDate.getHours();
                 var tempMinutes = tempDate.getMinutes();
                 var tempSecond = tempDate.getSeconds();
                 params.append('time', (tempHour < 10 ? '0'+ tempHour : tempHour) + ':' + (tempMinutes < 10 ? '0'+tempMinutes : tempMinutes) + ':' + (tempSecond < 10 ? '0'+tempSecond : tempSecond));
-                console.log(tempYear + '.' + (tempMonth < 10 ? '0' + tempMonth : tempMonth) + '.' + (tempDay < 10 ? '0' + tempDay : tempDay))
-                console.log((tempHour < 10 ? '0'+ tempHour : tempHour) + ':' + (tempMinutes < 10 ? '0'+tempMinutes : tempMinutes) + ':' + (tempSecond < 10 ? '0'+tempSecond : tempSecond));
                 axios
                     .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/createContent', params)
                     .then(res => {
