@@ -12,7 +12,7 @@
                                 :class="type === 'dark' ? 'bg-transparent': ''">
                             <div class="row align-items-center" style = "margin-bottom : 10px;">
                                 <div class="col d-flex justify-content-between" >
-                                <h2 @click="best()"><img src = "img/brand/full.png"> {{this.best}} </h2>
+                                <h2><img id = "bestHandler" @click="updown()" src = "img/brand/empty.png"> {{this.best}} </h2>
                                 <h2 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
                                     {{this.title}}
                                 </h2>
@@ -54,16 +54,18 @@
                 date : '',
                 time : '',
                 type : '',
-                best : 0
+                best : 0,
+                state : false
             }
         },
         mounted() {
             var params = new URLSearchParams();
+            var temp_gmail = this.$store.state.gmail;
             params.append('no', this.$route.params.no);
 
             axios
-              .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/read', params)
-              .then(res => {
+                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/read', params)
+                .then(res => {
                   this.no = res.data[0].no;
                   this.gmail = res.data[0].gmail;
                   this.name = res.data[0].name;
@@ -73,7 +75,24 @@
                   this.time = res.data[0].time;
                   this.type = res.data[0].type;
                   this.best = res.data[0].best;
-            });
+                })
+            
+            axios
+                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/getbest', params)
+                .then(res => {
+                    var myimage = document.getElementById('bestHandler');
+                    var userList = res.data.filter((v) => { return v.gmail === temp_gmail});
+
+                    if (userList[0].gmail === temp_gmail) {
+                        this.state = true;
+                        myimage.src = "img/brand/full.png";
+                    }
+                    else {
+                        this.state = false;
+                        myimage.src = "img/brand/empty.png";
+                    }
+                });
+                
         },
 
         methods : {
@@ -132,8 +151,6 @@
                                 router.push({
                                     name : 'Communication'
                                 })
-
-
                             })
                     }
                 }
@@ -141,15 +158,39 @@
                     alert('권한 없음');
             },
 
-            best() {
-                var best = this.best + 1;
+            updown() {
+                var temp_gmail = this.$store.state.gmail;
                 const params = new URLSearchParams();
-                params.append('best', best);
-                axios
-                    .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication', params)
-                    .then(res => {
-                        this.best = res.data[0].best;
-                    });
+                params.append('no', this.no);
+                params.append('gmail', temp_gmail);
+                var myimage = document.getElementById('bestHandler');
+
+                if (this.state === false) {
+                    axios
+                        .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/pushbest', params)
+                        .then(res => {
+                            if (res.data === 'done') {
+                                myimage.src = "img/brand/full.png"; 
+                                this.best += 1;
+                                this.state = true;
+                            }
+                            else
+                                alert('error');
+                        })
+                }
+                else if (this.state === true) {
+                    axios
+                        .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/deletebest', params)
+                        .then(res => {
+                            if (res.data === 'done') {
+                                myimage.src = "img/brand/empty.png";
+                                this.best -= 1;
+                                this.state = false;
+                            }
+                            else
+                                alert('error');
+                        });
+                }
             }
         }
     }
