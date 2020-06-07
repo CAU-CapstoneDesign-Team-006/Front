@@ -41,6 +41,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
         },
         {
+          path: '/infocommunication',
+          name: 'infoCommunication',
+          component: () => import(/* webpackChunkName: "demo" */ './views/infoCommunication.vue')
+        },
+        {
           path: '/communication',
           name: 'Communication',
           component: () => import(/* webpackChunkName: "demo" */ './views/Communication.vue')
@@ -51,14 +56,29 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/write.vue')
         },
         {
+          path: '/infocommunication/write',
+          name: 'infowrite',
+          component: () => import(/* webpackChunkName: "demo" */ './views/infowrite.vue')
+        },
+        {
           path: '/communication/read',
           name: 'read',
           component: () => import(/* webpackChunkName: "demo" */ './views/read.vue')
         },
         {
+          path: '/infocommunication/read',
+          name: 'inforead',
+          component: () => import(/* webpackChunkName: "demo" */ './views/inforead.vue')
+        },
+        {
           path: '/communication/update',
           name: 'update',
           component: () => import(/* webpackChunkName: "demo" */ './views/update.vue')
+        },
+        {
+          path: '/communication/infoupdate',
+          name: 'infoupdate',
+          component: () => import(/* webpackChunkName: "demo" */ './views/infoupdate.vue')
         },
         {
           path: '/hotBoard',
