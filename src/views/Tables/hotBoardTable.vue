@@ -21,6 +21,7 @@
                 <th>No.</th>
                 <th>Title</th>
                 <th>Name</th>
+                <th>Best</th>
                 <th>Date</th>
                 <th>Time</th>
               </template>
@@ -38,6 +39,9 @@
                 </td>
                 <td class ="name">
                   {{row.name}}
+                </td>
+                <td class ="best">
+                  {{row.best}}
                 </td>
                 <td class = "date">
                     {{row.date.slice(0, 10)}}
