@@ -76,7 +76,7 @@ import axios from 'axios'
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/hotrank')
           .then(res => {            
-                this.hotList = res.data;
+                this.hotList = res.data.sort((a,b) => { return a.date > b.date ? -1 : 1; });
           });
       },
     data() {
