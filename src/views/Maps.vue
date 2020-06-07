@@ -100,7 +100,7 @@
             addScript() { 
                 const script = document.createElement('script'); /* global kakao */ 
                 script.onload = () => kakao.maps.load(this.initMap); 
-                script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a7578f58544246c17d8dbff43d4b7902'; 
+                script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a7578f58544246c17d8dbff43d4b7902&libraries=services'; 
                 document.head.appendChild(script); 
             },
             fetchMarker(map) {

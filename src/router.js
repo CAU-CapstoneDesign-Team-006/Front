@@ -88,9 +88,9 @@ export default new Router({
           component: () => import(/* webpackChunckName: "demo" */ './views/selectType.vue')
         },
         {
-          path : '/storeinsert',
-          name : 'storeinsert',
-          component: () => import(/* webpackChunckName: "demo" */ './views/storeinsert.vue')
+          path : '/InsertStore',
+          name : 'InsertStore',
+          component: () => import(/* webpackChunckName: "demo" */ './views/InsertStore.vue')
         }
       ]
     }
