@@ -18,7 +18,7 @@
                                 <a href='#/dashboard' @click="person()" class="person btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/person.png">
                                 </a>
-                                <a href='#/storeinsert' @click="others()" class="others btn btn-neutral btn-icon btn-size">
+                                <a href='#/InsertStore' @click="others()" class="others btn btn-neutral btn-icon btn-size">
                                     <img src = "img/brand/manager.png">
                                 </a>
                                 <p></p>
@@ -98,7 +98,7 @@ export default {
                 .then(res => { 
                     this.$store.commit('name', googleUser.getBasicProfile().Bd);
                     router.push({
-                       name: 'storeinsert',
+                       name: 'InsertStore',
                        params: {
                                 'gmail' : this.$route.params.gmail,
                                 'name' : this.$route.params.name,

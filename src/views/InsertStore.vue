@@ -26,7 +26,7 @@
 
                         <base-input class="input-group-alternative"
                                     placeholder="information"
-                                    v-model="model.inforation">
+                                    v-model="model.information">
                         </base-input>
 
                         <base-dropdown>
@@ -55,7 +55,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'storeinsert',
+  name: 'InsertStore',
   mounted() {
             if (window.kakao && window.kakao.maps) {
                 console.log("already")
@@ -84,7 +84,6 @@ export default {
   methods : {
     insertStore() {
       var vm = this;
-      console.log(vm.model);
 
       var geocoder = new kakao.maps.services.Geocoder();
 
@@ -92,15 +91,14 @@ export default {
           if (status === kakao.maps.services.Status.OK) {
               console.log(result);
               const params = new URLSearchParams();
-              params.append('name', vm.model.name)
               params.append('category', vm.model.category)
               params.append('phone', vm.model.phone)
               params.append('information', vm.model.information)
               params.append('address', vm.model.address)
               params.append('name', vm.model.name)
               params.append('gmail', vm.$store.state.gmail)
-              params.append('latitude' , result.y)
-              params.append('longitude' , result.x)
+              params.append('latitude' , result[0].y)
+              params.append('longitude' , result[0].x)
               axios
                 .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/insert', params)
                 .then(res => {
@@ -125,8 +123,6 @@ export default {
       daum.postcode.load(function(){
           new daum.Postcode({
               oncomplete: function(data) {
-                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                  // 예제를 참고하여 다양한 활용법을 확인해 보세요.
                   vm.model.address = data.address;
               }
           }).open();
