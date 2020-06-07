@@ -34,7 +34,7 @@
                   </div>
                 </th>
                 <td class="title">
-                  <a style = "cursor:pointer" @click = "read(row.no)">{{row.title}}</a>
+                  <a style = "cursor:pointer" @click = "read(row.no, row.type)">{{row.title}}</a>
                 </td>
                 <td class ="name">
                   {{row.name}}
@@ -70,11 +70,9 @@ import axios from 'axios'
     },
     mounted() {
         axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication')
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/hotrank')
           .then(res => {            
-                this.hotList = res.data
-                                    .filter((v) => { return v.best >= 2; })
-                                    .sort((a,b) => { return b.no - a.no; });
+                this.hotList = res.data;
           });
       },
     data() {
@@ -84,18 +82,28 @@ import axios from 'axios'
       }
     },
     methods : {
-      read(no) {
+      read(no, type) {
         var router = this.$router;
         var params = new URLSearchParams();
         params.append('no', no);
+        params.append('type', type);
 
-        router.push({
-          name : 'read',
-          params : {
-            'no' : no
-          }
-        });
-        
+        if (type === '0') {
+          router.push({
+            name : 'read',
+            params : {
+              'no' : no
+            }
+          })
+        }
+        else if (type === '1') {
+          router.push({
+            name : 'inforead',
+            params : {
+              'no' : no
+            }
+          });
+        }
       }
     }
   }
