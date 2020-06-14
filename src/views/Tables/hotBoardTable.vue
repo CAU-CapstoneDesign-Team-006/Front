@@ -64,17 +64,9 @@
                 <td calss = "time">
                     {{row.time}}
                 </td>
-
-
               </template>
-
             </base-table>
           </div>
-      
-      <div class="card-footer d-flex justify-content-end"
-          :class="type === 'dark' ? 'bg-transparent': ''" style = "margin-bottom : 30px;">
-        <base-pagination total= 1></base-pagination>
-      </div>
       </div>
 </template>
 <script>
