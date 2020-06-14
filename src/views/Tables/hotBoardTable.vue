@@ -8,6 +8,21 @@
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
             Hot Hot Hot
           </h3>
+          <h4>
+            Search
+            <base-dropdown class="dropdown"
+                           position="right">
+              <a slot="title" class="btn btn-sm btn-icon-only text-light" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+              <template>
+                <a class="dropdown-item" @click = "daily()">Daily</a>
+                <a class="dropdown-item" @click = "week()">Week</a>
+                <a class="dropdown-item" @click = "Month()">Month</a>
+                <a class="dropdown-item" @click = "total()">Total</a>                
+              </template>
+            </base-dropdown>
+          </h4>
         </div>
       </div>
     </div>
@@ -82,7 +97,7 @@ import axios from 'axios'
     data() {
       return {
         hotList : [
-        ]
+        ],
       }
     },
     methods : {
@@ -108,7 +123,35 @@ import axios from 'axios'
             }
           });
         }
-      }
+      },
+      daily() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/hotrank/daily')
+          .then(res => {
+                this.hotList = res.data.sort((a,b) => { return a.date > b.date ? -1 : 1; });
+          });
+      },
+      week() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/hotrank/week')
+          .then(res => {
+                this.hotList = res.data.sort((a,b) => { return a.date > b.date ? -1 : 1; });
+          });
+      },
+      month() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/hotrank/month')
+          .then(res => {
+                this.hotList = res.data.sort((a,b) => { return a.date > b.date ? -1 : 1; });
+          });
+      },
+      total() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/hotrank')
+          .then(res => {
+                this.hotList = res.data.sort((a,b) => { return a.date > b.date ? -1 : 1; });
+          });
+      },
     }
   }
 </script>
