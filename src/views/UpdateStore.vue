@@ -43,7 +43,7 @@
                         <base-button @click="addressSearch()">주소 찾기</base-button>
 
                         <div class="text-center">
-                            <base-button type="primary" class="my-4" @click="updateStore()">Update Store</base-button>
+                            <base-button type="primary" class="my-4" @click="insertStore()">Update Store</base-button>
                         </div>
                     </form>
                 </div>
@@ -82,9 +82,8 @@ export default {
     }
   },
   methods : {
-    updateStore() {
+    insertStore() {
       var vm = this;
-      console.log(vm.model.phone);
 
       var geocoder = new kakao.maps.services.Geocoder();
 
@@ -92,17 +91,16 @@ export default {
           if (status === kakao.maps.services.Status.OK) {
               console.log(result);
               const params = new URLSearchParams();
-              params.append('gmail', vm.$store.state.gmail)
-              params.append('name', vm.$route.params.name)
-              params.append('newname', vm.model.name)
-              params.append('address', vm.model.address)
-              params.append('latitude' , result[0].y)
-              params.append('longitude' , result[0].x)
               params.append('category', vm.model.category)
               params.append('phone', vm.model.phone)
               params.append('information', vm.model.information)
+              params.append('address', vm.model.address)
+              params.append('name', vm.model.name)
+              params.append('gmail', vm.$store.state.gmail)
+              params.append('latitude' , result[0].y)
+              params.append('longitude' , result[0].x)
               axios
-                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/update', params)
+                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/insert', params)
                 .then(res => {
                    vm.$router.push({ 
                             name: 'dashboard'
