@@ -100,7 +100,7 @@
             addScript() { 
                 const script = document.createElement('script'); /* global kakao */ 
                 script.onload = () => kakao.maps.load(this.initMap); 
-                script.src = 'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a7578f58544246c17d8dbff43d4b7902&libraries=services'; 
+                script.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a7578f58544246c17d8dbff43d4b7902&libraries=services'; 
                 document.head.appendChild(script); 
             },
             fetchMarker(map) {
@@ -112,13 +112,15 @@
                 var neLat = ne.getLat();
                 var neLng = ne.getLng();
                 var vm = this;
+                let dup_lat = [];
+                let dup_lon = [];
                 const params = new URLSearchParams();
                 params.append('latitude0', swLat);
                 params.append('longitude0', swLng);
                 params.append('latitude1', neLat);
                 params.append('longitude1', neLng);
                 axios
-                    .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/find', params) 
+                    .post('https://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:443/find', params) 
                     .then(res => {
                         vm.mks = res.data
                         for (let i in vm.markers){
@@ -126,6 +128,18 @@
                         }
                         vm.markers = [];
                         for (var i in vm.mks){
+                            console.log(map.getLevel())
+                            if (map.getLevel() < 6){
+                                for (var j in dup_lat){
+                                    if (dup_lat[j] == vm.mks[i].latitude){
+                                        if(dup_lon[j] == vm.mks[i].longitude){
+                                            vm.mks[i].longitude += 0.00015
+                                        }
+                                    }
+                                }
+                                dup_lat.push(vm.mks[i].latitude);
+                                dup_lon.push(vm.mks[i].longitude);
+                            }
                             var imageSrc = vm.category[vm.mks[i].category], // 마커이미지의 주소입니다    
                             imageSize = new kakao.maps.Size(47, 47), // 마커이미지의 크기입니다
                             imageOption = {offset: new kakao.maps.Point(47, 47)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -146,7 +160,7 @@
                         vm.markerFiltering(vm.filter);
                     })
                     .catch(ex =>{
-                        console.log('why')
+                        console.log(ex)
                     })
             },
             markerFiltering(filter) {
