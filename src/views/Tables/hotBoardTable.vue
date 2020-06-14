@@ -33,7 +33,7 @@
                   tbody-classes="list"
                   :data="hotList">
               <template slot="columns">
-                <th>No.</th>
+                <th>Type</th>
                 <th>Title</th>
                 <th>Name</th>
                 <th>Best</th>
@@ -45,7 +45,7 @@
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="name mb-0 text-sm">{{row.no}}</span>
+                      <span class="name mb-0 text-sm">{{row.type === '0' ? "소통" : "정보"}}</span>
                     </div>
                   </div>
                 </th>

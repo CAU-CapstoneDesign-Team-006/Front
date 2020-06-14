@@ -111,6 +111,11 @@ export default new Router({
           path : '/InsertStore',
           name : 'InsertStore',
           component: () => import(/* webpackChunckName: "demo" */ './views/InsertStore.vue')
+        },
+        {
+          path : '/UpdateStore',
+          name : "UpdateStore",
+          component: () => import(/* webpackChunckName: "demo" */ './views/UpdateStore.vue')
         }
       ]
     }

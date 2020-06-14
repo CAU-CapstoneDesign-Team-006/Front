@@ -56,7 +56,7 @@
       
       <div class="card-footer d-flex justify-content-end"
           :class="type === 'dark' ? 'bg-transparent': ''" style = "margin-bottom : 30px;">
-        <base-pagination total= 1></base-pagination>
+        <base-pagination id = "pagenum" v-bind = 'pagination' v-model = 'pagination.default'></base-pagination>
       </div>
         
       </div>
@@ -74,7 +74,13 @@ import axios from 'axios'
     },
     mounted() {
         axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication')
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/totalpage')
+          .then(res => {
+            this.pagination.pageCount = res.data.total;
+          })
+
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/communication/' + 1)
           .then(res => {
             this.communication = res.data.sort((a,b) => { return b.no - a.no;});
           });
@@ -82,7 +88,11 @@ import axios from 'axios'
     data() {
       return {
         communication: [
-        ]
+        ],
+        pagination: {
+          default : 1,
+          pageCount : 1
+        }
       }
     },
     methods : {
