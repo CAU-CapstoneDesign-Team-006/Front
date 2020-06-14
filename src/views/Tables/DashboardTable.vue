@@ -29,7 +29,7 @@
               <template slot-scope="{row}">
                 
                 <td class="storeName">
-                  <a style = "cursor:pointer" @click = "readStore(row.storename)">{{row.storename}}</a>
+                  <a style = "cursor:pointer" @click = "readStore(row.name)">{{row.name}}</a>
                 </td>
                 <td class ="information">
                     {{row.information}}
@@ -38,8 +38,8 @@
                     {{row.address}}
                 </td>
                 <td>
-                    <base-button outline type = "primary" @click = "updateStore(row.storename, row.gmail, row.information, row.address, row.category, row.phone, row.latitude, row.longitude)">수정</base-button>
-                    <base-button outline type = "danger" @click = "deleteStore(row.storename)">삭제</base-button>
+                    <base-button outline type = "primary" @click = "updateStore(row.name, row.gmail, row.information, row.address, row.category, row.phone, row.latitude, row.longitude, row.newname)">수정</base-button>
+                    <base-button outline type = "danger" @click = "deleteStore(row.name)">삭제</base-button>
                 </td>
 
               </template>
@@ -73,8 +73,8 @@ import axios from 'axios'
         axios
           .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store', params)
           .then(res => {
-            console.log(res.data);
             this.store = res.data;
+            console.log(this.store);
             // if (res.data.length === 0)
             //                   {
             //                     var router = this.$router;
@@ -147,7 +147,7 @@ import axios from 'axios'
               });
       },
 
-      updateStore(name, gmail, info, address, category, phone, latitude, longitude) {
+      updateStore(name, gmail, info, address, category, phone, latitude, longitude, newname) {
           var params = new URLSearchParams();
           var temp_gmail = this.$store.state.gmail;
           var router = this.$router;
@@ -160,6 +160,8 @@ import axios from 'axios'
           params.append('information', info);
           params.append('latitude', latitude);
           params.append('longitude',longitude);
+          params.append('newname', newname);
+          console.log(newname);
 
           axios
             .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/update', params)
@@ -167,14 +169,15 @@ import axios from 'axios'
               router.push({
                 name : 'UpdateStore',
                 params : {
-                    'storename' : name,
+                    'name' : name,
                     'gmail' : gmail,
                     'phone' : phone,
                     'category' : category,
                     'information' : info,
                     'address' : address,
                     'latitude' : latitude,
-                    'longitude' : longitude
+                    'longitude' : longitude,
+                    'newname' : newname
                 }
               })
             })

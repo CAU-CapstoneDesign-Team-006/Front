@@ -43,7 +43,7 @@
                         <base-button @click="addressSearch()">주소 찾기</base-button>
 
                         <div class="text-center">
-                            <base-button type="primary" class="my-4" @click="insertStore()">Update Store</base-button>
+                            <base-button type="primary" class="my-4" @click="updateStore()">Update Store</base-button>
                         </div>
                     </form>
                 </div>
@@ -73,16 +73,20 @@ export default {
   data() {
     return {
       model: {
-        name: this.$route.params.storename,
+        name: this.$route.params.name,
         phone: this.$route.params.phone,
         information: this.$route.params.information,
         category: this.$route.params.category,
-        address: this.$route.params.address
+        address: this.$route.params.address,
+        newname: this.$route.params.newname,
+        latitude : this.$route.params.latitude,
+        longitude : this.$route.params.longitude,
+        gamil : this.$route.params.gmail
       }
     }
   },
   methods : {
-    insertStore() {
+    updateStore() {
       var vm = this;
 
       var geocoder = new kakao.maps.services.Geocoder();
@@ -96,15 +100,18 @@ export default {
               params.append('information', vm.model.information)
               params.append('address', vm.model.address)
               params.append('newname', vm.model.name)
-              params.append('name', vm.$route.params.storename)
+              params.append('name', vm.$route.params.name)
               params.append('gmail', vm.$store.state.gmail)
               params.append('latitude' , result[0].y)
               params.append('longitude' , result[0].x)
               axios
-                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/insert', params)
+                .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/update', params)
                 .then(res => {
+                  console.log(vm.$route.params.name);
+                  console.log(vm.model.name);
                    vm.$router.push({ 
-                            name: 'dashboard'
+                            name: 'dashboard',
+                      
                         }) 
                 })
                 .catch(ex => {
