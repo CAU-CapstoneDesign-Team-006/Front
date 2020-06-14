@@ -25,8 +25,8 @@
                             <div style = "align-items-right">
                                     
                             </div>
-                            <div style = "border : 1px solid black; height : 400px; font-size : 20px; margin-bottom : 50px;">
-                                    <pre><strong>{{this.content}}</strong></pre>
+                            <div class="container" style = "border : 1px solid black; height : 400px; font-size : 20px; margin-bottom : 50px;">
+                                    <pre>{{this.content}}</pre>
                             </div>
                             <div class = "d-flex justify-content-between">
                             <base-button type = "primary" @click="update()">수정</base-button>
