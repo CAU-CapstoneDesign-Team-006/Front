@@ -18,7 +18,7 @@
               <template>
                 <a class="dropdown-item" @click = "daily()">Daily</a>
                 <a class="dropdown-item" @click = "week()">Week</a>
-                <a class="dropdown-item" @click = "Month()">Month</a>
+                <a class="dropdown-item" @click = "month()">Month</a>
                 <a class="dropdown-item" @click = "total()">Total</a>                
               </template>
             </base-dropdown>
