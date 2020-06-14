@@ -16,7 +16,7 @@
 
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="store name"
-                                    v-model="model.name">
+                                    v-model="model.newname">
                         </base-input>
 
                         <base-input class="input-group-alternative mb-3"
@@ -78,10 +78,10 @@ export default {
         information: this.$route.params.information,
         category: this.$route.params.category,
         address: this.$route.params.address,
-        newname: this.$route.params.newname,
+        newname: this.$route.params.name,
         latitude : this.$route.params.latitude,
         longitude : this.$route.params.longitude,
-        gamil : this.$route.params.gmail
+        gmail : this.$route.params.gmail
       }
     }
   },
@@ -99,7 +99,7 @@ export default {
               params.append('phone', vm.model.phone)
               params.append('information', vm.model.information)
               params.append('address', vm.model.address)
-              params.append('newname', vm.model.name)
+              params.append('newname', vm.model.newname)
               params.append('name', vm.$route.params.name)
               params.append('gmail', vm.$store.state.gmail)
               params.append('latitude' , result[0].y)

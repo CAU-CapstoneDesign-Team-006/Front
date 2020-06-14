@@ -120,7 +120,7 @@
                 params.append('latitude1', neLat);
                 params.append('longitude1', neLng);
                 axios
-                    .post('https://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:443/find', params) 
+                    .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/find', params) 
                     .then(res => {
                         vm.mks = res.data
                         for (let i in vm.markers){

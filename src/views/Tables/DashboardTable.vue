@@ -38,7 +38,7 @@
                     {{row.address}}
                 </td>
                 <td>
-                    <base-button outline type = "primary" @click = "updateStore(row.name, row.gmail, row.information, row.address, row.category, row.phone, row.latitude, row.longitude, row.newname)">수정</base-button>
+                    <base-button outline type = "primary" @click = "updateStore(row.name, row.gmail, row.information, row.address, row.category, row.phone, row.latitude, row.longitude)">수정</base-button>
                     <base-button outline type = "danger" @click = "deleteStore(row.name)">삭제</base-button>
                 </td>
 
@@ -147,40 +147,22 @@ import axios from 'axios'
               });
       },
 
-      updateStore(name, gmail, info, address, category, phone, latitude, longitude, newname) {
-          var params = new URLSearchParams();
+      updateStore(name, gmail, info, address, category, phone, latitude, longitude) {
           var temp_gmail = this.$store.state.gmail;
           var router = this.$router;
-
-          params.append('name', name);
-          params.append('gmail', gmail);
-          params.append('phone', phone);
-          params.append('address', address);
-          params.append('category', category);
-          params.append('information', info);
-          params.append('latitude', latitude);
-          params.append('longitude',longitude);
-          params.append('newname', newname);
-          console.log(newname);
-
-          axios
-            .post('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/store/update', params)
-            .then(res => {
-              router.push({
-                name : 'UpdateStore',
-                params : {
-                    'name' : name,
-                    'gmail' : gmail,
-                    'phone' : phone,
-                    'category' : category,
-                    'information' : info,
-                    'address' : address,
-                    'latitude' : latitude,
-                    'longitude' : longitude,
-                    'newname' : newname
-                }
-              })
-            })
+          router.push({
+            name : 'UpdateStore',
+            params : {
+                'name' : name,
+                'gmail' : gmail,
+                'phone' : phone,
+                'category' : category,
+                'information' : info,
+                'address' : address,
+                'latitude' : latitude,
+                'longitude' : longitude,
+            }
+          })
       }
     }
     

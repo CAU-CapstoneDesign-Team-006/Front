@@ -64,11 +64,6 @@
 
             </base-table>
           </div>
-      
-      <div class="card-footer d-flex justify-content-end"
-          :class="type === 'dark' ? 'bg-transparent': ''" style = "margin-bottom : 30px;">
-        <base-pagination total= 1></base-pagination>
-      </div>
     
     <div>
       <div class="card shadow"
@@ -132,11 +127,6 @@
 
         </base-table>
         </div>
-
-        <div class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent': ''" style = "margin-bottom : 30px;">
-          <base-pagination total= 1></base-pagination>
-        </div>
       </div>
     </div>  
     <div>
@@ -188,11 +178,6 @@
         </template>
 
         </base-table>
-        </div>
-
-        <div class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent': ''">
-          <base-pagination total= 1></base-pagination>
         </div>
       </div>
     </div>
@@ -265,35 +250,6 @@ import axios from 'axios'
       },
       title: String
     },
-    mounted() {
-        axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
-          .then(res => {
-            this.franchise = res.data;
-          });
-        axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
-          .then(res => {
-            this.card = res.data;
-          });
-        axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/accommodation')
-          .then(res => {
-            this.accommodation = res.data;
-          })
-        axios
-        .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore')
-        .then(res => {
-          this.store = res.data;
-        })
-        axios
-          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore/total')
-          .then(res => {
-            this.pagination.pageCount = res.data.total;
-          })
-
-          
-      },
     data() {
       return {
         franchise: [
@@ -311,6 +267,36 @@ import axios from 'axios'
         }
       }
     },
+    mounted() {
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/franchise')
+          .then(res => {
+            this.franchise = res.data;
+          });
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/card')
+          .then(res => {
+            this.card = res.data;
+          });
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/accommodation')
+          .then(res => {
+            this.accommodation = res.data;
+          })
+        axios
+        .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore/' + 1 )
+        .then(res => {
+          this.store = res.data;
+          console.log(this.store)
+        })
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore/totalpage')
+          .then(res => {
+            this.pagination.pageCount = res.data.total;
+          })
+
+          
+      },
     methods : {
       vacation() {
         axios
@@ -384,13 +370,14 @@ import axios from 'axios'
       },
     },
     watch: {
-      store: function (newVal, oldVal) {
+      value: function (newVal, oldVal) {
         var vm = this;
         console.log(vm.value);
         axios
           .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore/' + vm.value)      
           .then(res => {
-            vm.store = res.data.sort((a,b) => { return b.no - a.no; });
+            this.store = res.data;
+            console.log('hi')
           })
       }
     }
