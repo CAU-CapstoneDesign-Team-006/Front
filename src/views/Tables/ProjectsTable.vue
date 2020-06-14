@@ -139,7 +139,7 @@
         </div>
       </div>
     </div>  
-        <div>
+    <div>
       <div class="card shadow"
         :class="type === 'dark' ? 'bg-default': ''">
         <div class="card-header border-0"
@@ -195,7 +195,64 @@
           <base-pagination total= 1></base-pagination>
         </div>
       </div>
-    </div>  
+    </div>
+    <div>
+      <div class="card shadow"
+        :class="type === 'dark' ? 'bg-default': ''">
+        <div class="card-header border-0"
+            :class="type === 'dark' ? 'bg-transparent': ''">
+            <div class="row align-items-center">
+              <div class="col d-flex justify-content-between">
+                <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
+                  자영업자
+                </h3>
+              </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+        <base-table class="table align-items-center table-flush"
+                   :class="type === 'dark' ? 'table-dark': ''"
+                   :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
+                    tbody-classes="list"
+                   :data="store">
+        <template slot="columns">
+        <th>Name</th>
+        <th>Address</th>
+        <th>Information</th>
+        <th>Phone</th>
+        </template>
+
+        <template slot-scope="{row}">
+        <th scope="row">
+        <div class="media align-items-center">
+          <div class="media-body">
+            <span class="name mb-0 text-sm">{{row.name}}</span>
+          </div>
+        </div>
+        </th>
+        <td class="name">
+        {{row.address}}
+        </td>
+        <td class ="information">
+        {{row.information}}
+        </td>
+        <td class = "phone">
+        {{row.phone}}
+        </td>
+
+
+        </template>
+
+        </base-table>
+        </div>
+
+        <div class="card-footer d-flex justify-content-end"
+            :class="type === 'dark' ? 'bg-transparent': ''">
+          <base-pagination id = "pagenum" :page-count='pagination.pageCount' v-model='value'></base-pagination>
+        </div>
+      </div>
+    </div>   
   </div>
 </template>
 <script>
@@ -224,6 +281,18 @@ import axios from 'axios'
           .then(res => {
             this.accommodation = res.data;
           })
+        axios
+        .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore')
+        .then(res => {
+          this.store = res.data;
+        })
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore/total')
+          .then(res => {
+            this.pagination.pageCount = res.data.total;
+          })
+
+          
       },
     data() {
       return {
@@ -232,7 +301,14 @@ import axios from 'axios'
         card : [
         ],
         accommodation : [
-        ]
+        ],
+        store : [
+        ],
+        value : 1,
+        pagination: {
+          default : 1,
+          pageCount : 1,
+        }
       }
     },
     methods : {
@@ -306,6 +382,17 @@ import axios from 'axios'
               this.card = res.data;
             })
       },
+    },
+    watch: {
+      store: function (newVal, oldVal) {
+        var vm = this;
+        console.log(vm.value);
+        axios
+          .get('http://ec2-13-125-55-59.ap-northeast-2.compute.amazonaws.com:3000/showstore/' + vm.value)      
+          .then(res => {
+            vm.store = res.data.sort((a,b) => { return b.no - a.no; });
+          })
+      }
     }
   }
 </script>
